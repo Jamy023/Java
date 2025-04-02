@@ -223,7 +223,7 @@ public class Menu_Principal extends javax.swing.JFrame {
     private void initializeMapa() {
         try {
             // Cargar la imagen del mapa
-            mapImage = ImageIO.read(getClass().getResource("/img/WhatsApp Image 2025-04-02 at 4.14.08 PM"));
+            mapImage = ImageIO.read(getClass().getResource("/img/WhatsApp Image 2025-04-02 at 4.14.08 PM.jpeg"));
             highlightedImage = new BufferedImage(mapImage.getWidth(), mapImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
             
             // Procesar la imagen para detectar bordes
