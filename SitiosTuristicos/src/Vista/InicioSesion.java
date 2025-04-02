@@ -13,7 +13,7 @@ public class InicioSesion extends javax.swing.JFrame {
     
     public InicioSesion() {
         initComponents();
-        // Crear el modelo y asignar el controlador
+        //CREAR EL MODELO Y ASIGNAR EL CONTROLADOR
         Usuario modelo = new Usuario();
         controlador = new UsuarioController(modelo, this);
     }
