@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Vista;
+package VIEW;
 
 import javax.swing.JFrame;
 import java.awt.*;
@@ -48,7 +48,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         //richard es gay
         //jammy es prosti
         //kjrgkljdsgfdfj
-        //jhfkjhedkjf
+        //camilo gay
         
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -156,6 +156,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 400, 60));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("MAPA POLITICO DEL CAQUETA");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 596, 280, 110));
 
@@ -223,58 +224,33 @@ public class Menu_Principal extends javax.swing.JFrame {
     private void initializeMapa() {
         try {
             // Cargar la imagen del mapa
-            mapImage = ImageIO.read(getClass().getResource("/img/WhatsApp Image 2025-04-02 at 4.14.08 PM"));
+            mapImage = ImageIO.read(getClass().getResource("/img/mapa sin nombres, pero con lineas.jpeg"));
             highlightedImage = new BufferedImage(mapImage.getWidth(), mapImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
             
             // Procesar la imagen para detectar bordes
             bordersImage = detectarBordes(mapImage);
             
             // Definir los puntos de los municipios
-            
-            puntosDeMunicipio.put(new Point(299, 205), "S. Visente del Caguàn");
-            puntosDeMunicipio.put(new Point(236, 78),  "S. Visente del Caguàn");
-
-            
-            puntosDeMunicipio.put(new Point(174, 164), "El Doncello");
-            puntosDeMunicipio.put(new Point(201, 210), "El Doncello");
-            puntosDeMunicipio.put(new Point(167, 108), "El Doncello");
-            puntosDeMunicipio.put(new Point(174, 130), "El Doncello");
-            
-            puntosDeMunicipio.put(new Point(325, 371), "Cartagena del Chaira");
-            
-            puntosDeMunicipio.put(new Point(563, 483), "Solano");
-            puntosDeMunicipio.put(new Point(249, 402), "Solano");
-            
-            puntosDeMunicipio.put(new Point(161, 176), "El Paujìl");
-            puntosDeMunicipio.put(new Point(175, 227), "El Paujìl");
-            
-            puntosDeMunicipio.put(new Point(202, 167), "Puerto Rico");
-            puntosDeMunicipio.put(new Point(186, 106), "Puerto Rico");
-            
-            puntosDeMunicipio.put(new Point(151, 186), "Montañita");
-            puntosDeMunicipio.put(new Point(177, 267), "Montañita");
-            puntosDeMunicipio.put(new Point(150, 130), "Montañita");
-            
-            puntosDeMunicipio.put(new Point(115, 198), "Florencia");
-            
-            puntosDeMunicipio.put(new Point(70, 227), "Belèn");
-            
-            puntosDeMunicipio.put(new Point(34, 261), "San Jose del Fragua");
-            
-            puntosDeMunicipio.put(new Point(61, 296), "Curillo");
-            
-            puntosDeMunicipio.put(new Point(71, 275), "Albania");
-            
-            puntosDeMunicipio.put(new Point(97, 323), "Solita");
-            
-            puntosDeMunicipio.put(new Point(123, 324), "Solita");
-            
-            puntosDeMunicipio.put(new Point(110, 292), "Valparaiso");
-            
-            puntosDeMunicipio.put(new Point(108, 251), "Morelia");
-            
-            puntosDeMunicipio.put(new Point(151, 285), "Milan");
-            
+           
+            puntosDeMunicipio.put(new Point(299, 205), "El Doncello");
+            puntosDeMunicipio.put(new Point(280,119), "El Doncello");
+             puntosDeMunicipio.put(new Point(292, 171), "Puerto Rico");
+          
+             puntosDeMunicipio.put(new Point(236, 203), "Florencia");
+              puntosDeMunicipio.put(new Point(335, 278), "Cartagena del Chaira");
+               puntosDeMunicipio.put(new Point(433, 404), "Cartagena del Chaira");
+               puntosDeMunicipio.put(new Point(450, 409), "Cartagena del Chaira");
+                puntosDeMunicipio.put(new Point(536 ,376), "Solano");
+               puntosDeMunicipio.put(new Point(481 , 468), "Solano");
+               puntosDeMunicipio.put(new Point(294 , 331), "Solano");
+               puntosDeMunicipio.put(new Point(415 ,295), "S.Vicente");
+               puntosDeMunicipio.put(new Point(357 , 217), "S.Vicente");
+               puntosDeMunicipio.put(new Point(316 , 120), "S.Vicente");
+                puntosDeMunicipio.put(new Point(256 , 221), "Montañita");
+                puntosDeMunicipio.put(new Point(289 , 225), "Paujil");
+                puntosDeMunicipio.put(new Point(277 , 147), "Paujil");
+                puntosDeMunicipio.put(new Point(215 , 226), "Belen");
+               
            
             
           
