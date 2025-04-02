@@ -46,6 +46,8 @@ public class Menu_Principal extends javax.swing.JFrame {
      */
     public Menu_Principal() {
         //richard es gay
+        //jammy es prosti
+        
         
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
