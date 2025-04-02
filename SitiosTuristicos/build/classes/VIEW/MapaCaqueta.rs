@@ -1,14 +1,3 @@
-MapaCaqueta$Region
-MapaCaqueta$MunicipioRegion
-MapaCaquetaMejorado
-MapaCaquetaIterativo
-MapaCaquetaMejorado$1
-MapaCaquetaImagen$1
-MapaCaqueta$MunicipioShape
-MapaCaqueta$3
-MapaCaquetaImagen
-MapaCaquetaIterativo$1
 MapaCaqueta$1
 MapaCaqueta$2
-MapaCaquetaIterativo$2
 MapaCaqueta

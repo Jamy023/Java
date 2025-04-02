@@ -45,6 +45,8 @@ public class Menu_Principal extends javax.swing.JFrame {
      * Creates new form Menu_Principal
      */
     public Menu_Principal() {
+        //richard es gay
+        
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         initializeMapa();
