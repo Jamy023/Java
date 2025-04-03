@@ -1,5 +1,4 @@
 package Vista;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -22,7 +21,7 @@ public class MapaCaqueta extends JPanel {
     public MapaCaqueta() {
         try {
             // Carga la imagen del mapa
-            mapImage = ImageIO.read(new File("C:\\Users\\User\\Documents\\NetBeansProjects\\SitiosTuristicos\\src\\img\\MUNICIPIOS (1).png"));
+            mapImage = ImageIO.read(new File("src\\img\\WhatsApp Image 2025-04-02 at 4.14.08 PM.jpeg"));
             highlightedImage = new BufferedImage(mapImage.getWidth(), mapImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
             
             // Procesa la imagen para detectar bordes

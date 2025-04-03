@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.UsuarioController;
+import Controlador.Vista_Principal;
 import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.*;
@@ -29,7 +31,7 @@ import javax.swing.SwingUtilities;
  */
 public class Menu_Principal extends javax.swing.JFrame {
 
-     private String municipioActual = null;
+    private String municipioActual = null;
     private final Color HIGHLIGHT_COLOR = new Color(19, 144, 7); // Transparencia añadida
     private BufferedImage mapImage;
     private BufferedImage bordersImage; // Imagen para detección de bordes
@@ -41,21 +43,17 @@ public class Menu_Principal extends javax.swing.JFrame {
     // Panel flotante para mostrar información del municipio
     private JPanel panelFlotante;
     private JLabel labelNombreMunicipio;
-    /**
-     * Creates new form Menu_Principal
-     */
+   
+    
     public Menu_Principal() {
-        //richard es gay
-        //jammy es prosti
-        //kjrgkljdsgfdfj
-        //jhfkjhedkjf
-        
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         initializeMapa();
         setupKeyListener();
         crearPanelFlotante();
+        fondo(jlb_fondo, "src\\img\\vista_principal.png");
     }
+    
     private void crearPanelFlotante() {
         // Crear el panel flotante
         panelFlotante = new JPanel();
@@ -81,6 +79,16 @@ public class Menu_Principal extends javax.swing.JFrame {
         // Agregar el panel a la capa de cristal del JFrame
         this.getLayeredPane().add(panelFlotante, JLayeredPane.POPUP_LAYER);
     }
+    
+    public void fondo(JLabel label, String ruta) {
+        ImageIcon icon = new ImageIcon("src\\img\\vista_principal.png");
+        Image img = icon.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+        label.setIcon(new ImageIcon(img));
+
+    }
+    
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,84 +99,47 @@ public class Menu_Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jlb_admin = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jbt_admin = new javax.swing.JButton();
+        jlb_fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bandera_Caqueta.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 160, 110));
+        jlb_admin.setText("jLabel3");
+        jlb_admin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jlb_admin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlb_adminMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jlb_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 30, 70, 90));
 
-        jLabel2.setText("Caquetá - Paraíso Natural");
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 620, 110));
-
-        jLabel3.setText("jLabel3");
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 20, 60, 50));
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel4.setText("jLabel4");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jTextField1.setText("jTextField1");
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 140, 400, 180));
-
-        jLabel5.setText("jLabel5");
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 340, 400, 370));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 440, 430, 300));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 400, 60));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
-        jLabel8.setText("MAPA POLITICO DEL CAQUETA");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 596, 280, 110));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/MUNICIPIOS (1).png"))); // NOI18N
         jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 840, 580));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 840, 590));
 
-        jLabel9.setText("LOGO");
-        jLabel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 200, 110));
+        jbt_admin.setText("jButton1");
+        getContentPane().add(jbt_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 30, -1, 90));
+
+        jlb_fondo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(jlb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1368, 769));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jlb_adminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlb_adminMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jlb_adminMouseClicked
 
     /**
      * @param args the command line arguments
@@ -207,23 +178,18 @@ public class Menu_Principal extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    public javax.swing.JButton jbt_admin;
+    public javax.swing.JLabel jlb_admin;
+    private javax.swing.JLabel jlb_fondo;
     // End of variables declaration//GEN-END:variables
 
     private void initializeMapa() {
         try {
             // Cargar la imagen del mapa
-            mapImage = ImageIO.read(getClass().getResource("/img/WhatsApp Image 2025-04-02 at 4.14.08 PM"));
+            mapImage = ImageIO.read(getClass().getResource("/img/mapa.png"));
             highlightedImage = new BufferedImage(mapImage.getWidth(), mapImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
             
             // Procesar la imagen para detectar bordes
@@ -405,8 +371,7 @@ public class Menu_Principal extends javax.swing.JFrame {
                 int panelY = currentY + 20;
                 
                 // Convert to the layered pane's coordinate system
-                Point convertedPoint = SwingUtilities.convertPoint(
-                    jLabel6, panelX, panelY, getLayeredPane());
+                Point convertedPoint = SwingUtilities.convertPoint(jLabel6, panelX, panelY, getLayeredPane());
                 
                 // Ensure panel doesn't go off-screen
                 Dimension panelSize = panelFlotante.getPreferredSize();
@@ -572,4 +537,9 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
     }
+
+    public Object jbt_admin() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
