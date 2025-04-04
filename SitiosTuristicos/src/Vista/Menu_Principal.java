@@ -51,7 +51,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         initializeMapa();
         setupKeyListener();
         crearPanelFlotante();
-        fondo(jlb_fondo, "src\\img\\vista_principal.png");
+        fondo(jlb_fondo, "src\\img\\menu principal.png");
     }
     
     private void crearPanelFlotante() {
@@ -81,7 +81,7 @@ public class Menu_Principal extends javax.swing.JFrame {
     }
     
     public void fondo(JLabel label, String ruta) {
-        ImageIcon icon = new ImageIcon("src\\img\\vista_principal.png");
+        ImageIcon icon = new ImageIcon("src\\img\\menu principal.png");
         Image img = icon.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
         label.setIcon(new ImageIcon(img));
 
@@ -107,6 +107,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         jlb_fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlb_admin.setText("jLabel3");
@@ -119,19 +120,17 @@ public class Menu_Principal extends javax.swing.JFrame {
         getContentPane().add(jlb_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 30, 70, 90));
 
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 440, 430, 300));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 600, 430, 300));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 400, 60));
-
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 840, 590));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 1040, 704));
 
         jbt_admin.setText("jButton1");
         getContentPane().add(jbt_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 30, -1, 90));
 
         jlb_fondo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jlb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1368, 769));
+        getContentPane().add(jlb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
