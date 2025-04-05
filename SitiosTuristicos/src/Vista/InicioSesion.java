@@ -1,31 +1,26 @@
 
 package Vista;
 
-import Controlador.UsuarioController;
+import Controlador.UsuarioControlador;
 import Modelo.Usuario;
+import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class InicioSesion extends javax.swing.JFrame {
 
-    private UsuarioController controlador;
+    private UsuarioControlador controlador;
     
     public InicioSesion() {
         initComponents();
         //CREAR EL MODELO Y ASIGNAR EL CONTROLADOR
         Usuario modelo = new Usuario();
-        controlador = new UsuarioController(modelo, this);
+        controlador = new UsuarioControlador(modelo, this);
+        
     }
 
-    public javax.swing.JButton getButton_Inicio() {
-        return btnInicio;
-    }
-
-    public javax.swing.JTextField getTxtUsuario() {
-        return txtusuario;
-    }
-
-    public javax.swing.JPasswordField getPass() {
-        return pass;
-    }
+   
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -41,6 +36,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(600, 300));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Perpetua", 1, 24)); // NOI18N
@@ -97,33 +93,14 @@ public class InicioSesion extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+        EstiloInicioAdmin.aplicarEstilo();
+        
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InicioSesion().setVisible(true);
+        public void run() {
+                InicioSesion ventana = new InicioSesion();
+                SwingUtilities.updateComponentTreeUI(ventana); 
+                ventana.setVisible(true);
             }
         });
     }

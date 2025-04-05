@@ -4,8 +4,8 @@
  */
 package Vista;
 
-import Controlador.UsuarioController;
-import Controlador.Vista_Principal;
+import Controlador.UsuarioControlador;
+import Controlador.MenuPrincipalControlador;
 import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.*;
@@ -46,11 +46,16 @@ public class Menu_Principal extends javax.swing.JFrame {
     
     public Menu_Principal() {
         initComponents();
+        FondoDesenfoque.setVisible(false);
+        jbt_admin.setContentAreaFilled(false); 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         initializeMapa();
         setupKeyListener();
         crearPanelFlotante();
         fondo(jlb_fondo, "src\\img\\foto menu.png");
+        
+        InicioSesion vistaLogin = new InicioSesion();
+        MenuPrincipalControlador controlador = new MenuPrincipalControlador(vistaLogin,this);
     }
     
     private void crearPanelFlotante() {
@@ -98,15 +103,23 @@ public class Menu_Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        FondoDesenfoque = new javax.swing.JLabel();
+        jbt_admin = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jbt_admin = new javax.swing.JButton();
         jlb_fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        FondoDesenfoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/FondoDesenfoque.jpg"))); // NOI18N
+        FondoDesenfoque.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(FondoDesenfoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
+
+        jbt_admin.setBorder(null);
+        getContentPane().add(jbt_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 970, 100, 100));
 
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 450, 486, 434));
@@ -115,25 +128,11 @@ public class Menu_Principal extends javax.swing.JFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 400, 60));
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 1040, 704));
 
-        jbt_admin.setText("jButton1");
-        jbt_admin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbt_adminActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jbt_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 960, -1, 90));
-
         jlb_fondo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(jlb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbt_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_adminActionPerformed
-        EstiloInicioAdmin abrir = new EstiloInicioAdmin();
-        
-        
-    }//GEN-LAST:event_jbt_adminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +171,7 @@ public class Menu_Principal extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel FondoDesenfoque;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

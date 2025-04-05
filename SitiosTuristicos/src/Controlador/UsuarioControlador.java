@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Controlador;
 
 import Modelo.Usuario;
@@ -8,22 +12,26 @@ import java.awt.event.ActionListener;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
-public class UsuarioController implements ActionListener {
+/**
+ *
+ * @author danie
+ */
+public class UsuarioControlador implements ActionListener {
+    
     private Usuario modelo;
     private InicioSesion vista;
-
-    public UsuarioController(Usuario modelo, InicioSesion vista) {
+    
+    public UsuarioControlador(Usuario modelo, InicioSesion vista){
         this.modelo = modelo;
         this.vista = vista;
         
-        //AGREGAR EL LISTENER AL BOTON DE INICIO DE SESION
-        this.vista.getButton_Inicio().addActionListener(this);
+        this.vista.btnInicio.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == vista.getButton_Inicio()) {
-            iniciarSesion();
+        if(e.getSource() == vista.btnInicio) {
+            Iniciar_Sesion();
         }
     }
     
@@ -33,15 +41,14 @@ public class UsuarioController implements ActionListener {
         return Pattern.matches(regex, correo);
     }
     
-    //METODO PARA EL INICIO DE SESION DEL ADMINISTRADOR
-    private void iniciarSesion() {
-        String correo = vista.getTxtUsuario().getText();  
-        String clave = new String(vista.getPass().getPassword());
+    public void Iniciar_Sesion() {
+        String correo = vista.txtusuario.getText();
+        String clave = new String(vista.pass.getPassword());
         
         modelo.setCorreo(correo);
         modelo.setClave(clave);
         
-        //VALIDA EL CORREO INGRESADO
+         //VALIDA EL CORREO INGRESADO
         if (!esCorreoValido(correo)) {
             JOptionPane.showMessageDialog(vista, "Por favor, ingrese un correo electrónico válido.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -57,4 +64,3 @@ public class UsuarioController implements ActionListener {
         }
     }
 }
-
