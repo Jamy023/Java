@@ -24,7 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
 /**
  *
  * @author User
@@ -51,7 +50,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         initializeMapa();
         setupKeyListener();
         crearPanelFlotante();
-        fondo(jlb_fondo, "src\\img\\menu principal.png");
+        fondo(jlb_fondo, "src\\img\\foto menu.png");
     }
     
     private void crearPanelFlotante() {
@@ -81,7 +80,7 @@ public class Menu_Principal extends javax.swing.JFrame {
     }
     
     public void fondo(JLabel label, String ruta) {
-        ImageIcon icon = new ImageIcon("src\\img\\menu principal.png");
+        ImageIcon icon = new ImageIcon("src\\img\\foto menu.png");
         Image img = icon.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
         label.setIcon(new ImageIcon(img));
 
@@ -99,7 +98,6 @@ public class Menu_Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jlb_admin = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -110,24 +108,20 @@ public class Menu_Principal extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jlb_admin.setText("jLabel3");
-        jlb_admin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jlb_admin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlb_adminMouseClicked(evt);
-            }
-        });
-        getContentPane().add(jlb_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 30, 70, 90));
-
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 600, 430, 300));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 450, 486, 434));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 400, 60));
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 1040, 704));
 
         jbt_admin.setText("jButton1");
-        getContentPane().add(jbt_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 30, -1, 90));
+        jbt_admin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbt_adminActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jbt_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 960, -1, 90));
 
         jlb_fondo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(jlb_fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
@@ -135,10 +129,11 @@ public class Menu_Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jlb_adminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlb_adminMouseClicked
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jlb_adminMouseClicked
+    private void jbt_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_adminActionPerformed
+        EstiloInicioAdmin abrir = new EstiloInicioAdmin();
+        
+        
+    }//GEN-LAST:event_jbt_adminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,7 +176,6 @@ public class Menu_Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     public javax.swing.JButton jbt_admin;
-    public javax.swing.JLabel jlb_admin;
     private javax.swing.JLabel jlb_fondo;
     // End of variables declaration//GEN-END:variables
 
