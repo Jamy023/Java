@@ -1,5 +1,6 @@
 package Modelo;
 
+import static Modelo.Conexion.conexi;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -76,16 +77,16 @@ public class Usuario {
     }
     
     public boolean Login() {
-        Connection conn = Conexion.getConexion();
+        Connection con = conexi(); 
         String sql = "SELECT * FROM usuario WHERE correo = ? AND clave = ?";
 
         try {
-            if (conn == null) {
+            if (con == null) {
                 System.out.println("Error: La conexión es nula.");
                 return false;
             }
 
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, this.correo);
             ps.setString(2, this.clave);
 
