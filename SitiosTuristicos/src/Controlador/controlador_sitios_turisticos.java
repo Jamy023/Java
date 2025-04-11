@@ -98,7 +98,7 @@ public class controlador_sitios_turisticos implements ActionListener{
 
             btnServicio.addActionListener(e -> {
                 switch (tipoServicio) {
-                    case "sitio de interes":
+                    case "Parqueadero":
                         JOptionPane.showMessageDialog(null, "Ya estás viendo un sitio de interés.");
                         break;
                     case "Como llegar":

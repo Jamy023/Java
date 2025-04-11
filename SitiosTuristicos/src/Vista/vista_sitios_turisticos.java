@@ -409,7 +409,7 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vista_sitios_turisticos("CTierras del Munay").setVisible(true);
+                new vista_sitios_turisticos("Cascada la Avispa").setVisible(true);
             }
         });
     }
