@@ -10,6 +10,8 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Modelo.modelo_sitios_turisticos;
+import Vista.comoLlegar;
+import Vista.restaurante;
 import Vista.vista_sitios_turisticos;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import vistas.VentanaTuristica;
+import javax.swing.Timer;
 
 
 /**
@@ -49,21 +52,31 @@ public class controlador_sitios_turisticos implements ActionListener{
         
         vista.lblNombre_sitio.setText(sitio_turistico);
         
-        /*
+        
         List<String> grupoSitioInteres = imagenes.get(3);
         
-        ImageIcon icon = new ImageIcon(grupoSitioInteres.get(0));
+        // Lista de imágenes del grupo 3 (sitios turísticos)
+        
 
-        Image image = icon.getImage();
+        // Verifica que haya imágenes
+        if (grupoSitioInteres != null && !grupoSitioInteres.isEmpty()) {
+            final int[] index = {0}; // índice actual de imagen
 
-        Image scaledImage = image.getScaledInstance(vista.img.getWidth(), vista.img.getHeight(), Image.SCALE_SMOOTH);
+            // Mostrar la primera imagen
+            modelo.mostrarImagen(grupoSitioInteres.get(index[0]), vista);
 
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        vista.img.setText(null);
-        vista.img.setIcon(scaledIcon);*/
+            // Crear un Timer para cambiar imagen cada 8 segundos (8000 ms)
+            new javax.swing.Timer(8000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    index[0] = (index[0] + 1) % grupoSitioInteres.size(); // avanzar al siguiente
+                    modelo.mostrarImagen(grupoSitioInteres.get(index[0]), vista);
+                }
+            }).start();
+        }
         
         vista.lblDescripcion.setText("<html>" + descripcionYPrecio.replace("\n", "<br>") + "</html>");
-        cargarServicios("charco azul");
+        cargarServicios(sitio_turistico);
         
         modelo.cargarEstrellas(vista, false);
     }
@@ -85,21 +98,17 @@ public class controlador_sitios_turisticos implements ActionListener{
 
             btnServicio.addActionListener(e -> {
                 switch (tipoServicio) {
-                    case "Guía turística":
-                        JOptionPane.showMessageDialog(null, "Mostrando información del guía turístico.");
-                        // Aquí puedes abrir una vista o cargar info del guía
-                        break;
-                    case "Transporte":
-                        JOptionPane.showMessageDialog(null, "Mostrando opciones de transporte.");
-                        break;
                     case "sitio de interes":
                         JOptionPane.showMessageDialog(null, "Ya estás viendo un sitio de interés.");
                         break;
-                    case "Como llgar":
-                        JOptionPane.showMessageDialog(null, "Mostrando cómo llegar al sitio.");
+                    case "Como llegar":
+                        comoLlegar mostrar = new comoLlegar(modelo.obtenerImagenComoLlegarPorSitio(sitio_turistico));
+                        mostrar.setVisible(true);
                         break;
                     case "Restaurantes":
-                        JOptionPane.showMessageDialog(null, "Mostrando restaurantes cercanos.");
+                        
+                        restaurante res = new restaurante(modelo.obtenerImagenRestaurantePorSitio(sitio_turistico));
+                        res.setVisible(true);
                         break;
                     case "Alojamiento":
                         JOptionPane.showMessageDialog(null, "Mostrando opciones de alojamiento.");
@@ -123,7 +132,7 @@ public class controlador_sitios_turisticos implements ActionListener{
             modelo_sitios_turisticos.insertarCalificacion(vista.numeroEstrella, sitio_turistico);   
         }
         else if(e.getSource() == vista.vista360) {
-            VentanaTuristica foto360 = new VentanaTuristica("C:\\Users\\userx\\Documents\\Java ADSO\\SitiosTuristicos\\src\\imagenes\\sena360.JPEG");
+            VentanaTuristica foto360 = new VentanaTuristica(modelo.obtenerImagen360PorSitio(sitio_turistico));
             foto360.setVisible(true);
         }
     }
