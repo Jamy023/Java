@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.ControladorTurismo;
+import Vista.PanelAdminMunicipio;
 import Modelo.Municipio;
 import Modelo.SitioInteres;
 import Modelo.TipoSitioInteres;
@@ -16,6 +17,8 @@ public class EditarSitioView extends JFrame {
     
     private final ControladorTurismo controlador;
     private SitioInteres sitioActual;
+    private PanelAdminMunicipio panelPadre;
+
     
     // Componentes de la interfaz
     private JTextField txtNombre;
@@ -36,15 +39,18 @@ public class EditarSitioView extends JFrame {
     private final Color COLOR_FONDO = new Color(236, 240, 241);
     private final Color COLOR_TEXTO = new Color(44, 62, 80);
     private final Color COLOR_EXITO = new Color(44, 45, 44);
+
+
     
     /**
      * Constructor
      * @param controlador Controlador de turismo
      * @param idSitio ID del sitio a editar
      */
-    public EditarSitioView(ControladorTurismo controlador, int idSitio) {
+    public EditarSitioView(ControladorTurismo controlador, int idSitio ,PanelAdminMunicipio panelPadre) {
         super("Gestión de Sitios Turísticos");
         this.controlador = controlador;
+        this.panelPadre = panelPadre;
         
         // Establecer look and feel
         try {
@@ -438,6 +444,9 @@ public class EditarSitioView extends JFrame {
             if (resultado) {
                 mostrarMensajeExito("Sitio actualizado correctamente", 
                     "La información del sitio turístico ha sido actualizada en el sistema.");
+             panelPadre.cargarDatos();
+
+                
                 dispose();
             } else {
                 mostrarMensajeError("Error", "No se pudo actualizar el sitio");
