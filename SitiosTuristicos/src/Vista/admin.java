@@ -78,7 +78,7 @@ public class admin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonFlorencia = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -159,10 +159,10 @@ public class admin extends javax.swing.JFrame {
         jLabel7.setText("Capital turística del Caquetá");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 207, 174, -1));
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 0));
-        jButton1.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jButton1.setText("ADMINISTRAR");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 220, 40));
+        jButtonFlorencia.setBackground(new java.awt.Color(0, 102, 0));
+        jButtonFlorencia.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jButtonFlorencia.setText("ADMINISTRAR");
+        jPanel1.add(jButtonFlorencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 220, 40));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/florencia_1.jpg"))); // NOI18N
         jLabel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -275,11 +275,11 @@ public class admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonFlorencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

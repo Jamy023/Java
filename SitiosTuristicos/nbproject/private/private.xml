@@ -12,22 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/User/Documents/GitHub/Java/SitiosTuristicos/src/Vista/SitiosTuristicos.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/Java/SitiosTuristicos/src/Modelo/Conexion.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/Java/SitiosTuristicos/src/Vista/PanelPanoramico.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/Java/SitiosTuristicos/src/Vista/inicio_sitio.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/Java/SitiosTuristicos/src/Vista/vista_sitios_turisticos.java</file>
-            <file>file:/C:/Users/User/Documents/GitHub/Java/SitiosTuristicos/src/Vista/VentanaTuristica.java</file>
-=======
-            <file>file:/C:/Users/userx/Documents/GitHub/Java/SitiosTuristicos/src/Vista/inicio_sitio.java</file>
-            <file>file:/C:/Users/userx/Documents/GitHub/Java/SitiosTuristicos/src/Modelo/modelo_sitios_turisticos.java</file>
-            <file>file:/C:/Users/userx/Documents/GitHub/Java/SitiosTuristicos/src/Vista/comoLlegar.java</file>
-            <file>file:/C:/Users/userx/Documents/GitHub/Java/SitiosTuristicos/src/Controlador/controlador_sitios_turisticos.java</file>
-            <file>file:/C:/Users/userx/Documents/GitHub/Java/SitiosTuristicos/src/Vista/restaurante.java</file>
-            <file>file:/C:/Users/userx/Documents/GitHub/Java/SitiosTuristicos/src/Vista/vista_sitios_turisticos.java</file>
-            <file>file:/C:/Users/userx/Documents/GitHub/Java/SitiosTuristicos/src/Modelo/Conexion.java</file>
->>>>>>> 8b28e0f8db8b91e4833d9874069cdb889398b571
+            <file>file:/C:/Users/User/Documents/GitHub/Java/SitiosTuristicos/src/Vista/admin.java</file>
         </group>
     </open-files>
 </project-private>

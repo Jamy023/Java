@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Modelo;
 
 import java.sql.Connection;
@@ -20,10 +16,12 @@ public class Conexion {
     private static Connection conexion;
     private static Statement consulta;
     
-     public static Connection conexi() {
+    public static Connection conexi() {
         try {
-            conexion = DriverManager.getConnection(ruta, user, pass);
-            consulta = conexion.createStatement();
+            if (conexion == null || conexion.isClosed()) {
+                conexion = DriverManager.getConnection(ruta, user, pass);
+                consulta = conexion.createStatement();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -31,15 +29,26 @@ public class Conexion {
     }
 
     public static Statement consultas() {
+        try {
+            if (consulta == null || consulta.isClosed()) {
+                if (conexion == null || conexion.isClosed()) {
+                    conexi();
+                } else {
+                    consulta = conexion.createStatement();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return consulta;
     }
 
     public static void cerrarConexion() {
         try {
-            if (consulta != null) {
+            if (consulta != null && !consulta.isClosed()) {
                 consulta.close();
             }
-            if (conexion != null) {
+            if (conexion != null && !conexion.isClosed()) {
                 conexion.close();
             }
         } catch (SQLException e) {
@@ -48,9 +57,13 @@ public class Conexion {
     }
 
     public static Connection obtenerConexion() {
+        try {
+            if (conexion == null || conexion.isClosed()) {
+                conexi();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return conexion;
     }
-    
 }
-
-
