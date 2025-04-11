@@ -27,16 +27,10 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
     public vista_sitios_turisticos(String sitio_turistico) {
         initComponents();
         
-        
-        
-        
-        
+
         controlador = new controlador_sitios_turisticos(this, modelo, sitio_turistico);
         controlador.iniciar();
-        
-        
-        
-        
+    
         cargarFondo();
         
     }
@@ -84,7 +78,7 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         img.setText("jLabel1");
-        img.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        img.setBorder(javax.swing.BorderFactory.createLineBorder(null));
         getContentPane().add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 111, 990, 279));
 
         lblNombre_sitio.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 36)); // NOI18N
@@ -415,7 +409,7 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vista_sitios_turisticos("Charco azul").setVisible(true);
+                new vista_sitios_turisticos("CTierras del Munay").setVisible(true);
             }
         });
     }

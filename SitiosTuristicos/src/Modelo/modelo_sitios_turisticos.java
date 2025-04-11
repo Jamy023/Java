@@ -17,6 +17,7 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import Vista.vista_sitios_turisticos;
+import java.net.URL;
 
 public class modelo_sitios_turisticos {
     
@@ -59,106 +60,106 @@ public class modelo_sitios_turisticos {
     }
      
     public String obtenerDescripcionYPrecioPorSitio(String nombreSitio) {
-    String descripcion = null;
-    double precio = 0.0;
-    double promedioEstrellas = 0.0;
+        String descripcion = null;
+        double precio = 0.0;
+        double promedioEstrellas = 0.0;
 
-    // Consulta para descripción y precio
-    String queryInfo = "SELECT descripcion, precio FROM sitios_interes WHERE nombre_sitio = ?";
+        // Consulta para descripción y precio
+        String queryInfo = "SELECT descripcion, precio FROM sitios_interes WHERE nombre_sitio = ?";
 
-    // Consulta para obtener promedio de estrellas usando subconsulta
-    String queryCalificacion = 
-        "SELECT AVG(c.estrellas) AS promedio " +
-        "FROM calificaciones c " +
-        "JOIN sitios_interes s ON c.id_sitio_fk = s.id " +
-        "WHERE s.nombre_sitio = ?";
+        // Consulta para obtener promedio de estrellas usando subconsulta
+        String queryCalificacion = 
+            "SELECT AVG(c.estrellas) AS promedio " +
+            "FROM calificaciones c " +
+            "JOIN sitios_interes s ON c.id_sitio_fk = s.id " +
+            "WHERE s.nombre_sitio = ?";
 
-    try {
-        Connection con = conexi();
+        try {
+            Connection con = conexi();
 
-        // 1. Obtener descripción y precio
-        PreparedStatement stmtInfo = con.prepareStatement(queryInfo);
-        stmtInfo.setString(1, nombreSitio);
-        ResultSet rsInfo = stmtInfo.executeQuery();
+            // 1. Obtener descripción y precio
+            PreparedStatement stmtInfo = con.prepareStatement(queryInfo);
+            stmtInfo.setString(1, nombreSitio);
+            ResultSet rsInfo = stmtInfo.executeQuery();
 
-        if (rsInfo.next()) {
-            descripcion = rsInfo.getString("descripcion");
-            precio = rsInfo.getDouble("precio");
+            if (rsInfo.next()) {
+                descripcion = rsInfo.getString("descripcion");
+                precio = rsInfo.getDouble("precio");
+            }
+
+            rsInfo.close();
+            stmtInfo.close();
+
+            // 2. Obtener calificación promedio
+            PreparedStatement stmtCalif = con.prepareStatement(queryCalificacion);
+            stmtCalif.setString(1, nombreSitio);
+            ResultSet rsCalif = stmtCalif.executeQuery();
+
+            if (rsCalif.next()) {
+                promedioEstrellas = rsCalif.getDouble("promedio");
+            }
+
+            rsCalif.close();
+            stmtCalif.close();
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Error al obtener los datos del sitio: " + e.getMessage();
         }
 
-        rsInfo.close();
-        stmtInfo.close();
-
-        // 2. Obtener calificación promedio
-        PreparedStatement stmtCalif = con.prepareStatement(queryCalificacion);
-        stmtCalif.setString(1, nombreSitio);
-        ResultSet rsCalif = stmtCalif.executeQuery();
-
-        if (rsCalif.next()) {
-            promedioEstrellas = rsCalif.getDouble("promedio");
+        if (descripcion == null) {
+            return "No se encontró información para el sitio: " + nombreSitio;
         }
 
-        rsCalif.close();
-        stmtCalif.close();
-        con.close();
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return "Error al obtener los datos del sitio: " + e.getMessage();
+        return descripcion + "\nPrecio: $" + precio + "\nCalificación promedio: " + String.format("%.1f", promedioEstrellas) + " estrellas";
     }
-
-    if (descripcion == null) {
-        return "No se encontró información para el sitio: " + nombreSitio;
-    }
-
-    return descripcion + "\nPrecio: $" + precio + "\nCalificación promedio: " + String.format("%.1f", promedioEstrellas) + " estrellas";
-}
-
-
-
     
     public Map<Integer, String> obtenerServiciosPorSitio(String nombreSitio) {
-        Map<Integer, String> serviciosPorTipo = new HashMap<>();
-        String sql = "SELECT DISTINCT ts.id, ts.tipo " +
+        Map<Integer, String> serviciosMap = new HashMap<>();
+        String sql = "SELECT s.id, s.nombre_servicio " +
                      "FROM servicios s " +
-                     "JOIN tipo_servicio ts ON s.tipo = ts.id " +
                      "JOIN sitios_interes si ON s.id_sitio_fk = si.id " +
                      "WHERE si.nombre_sitio = ?";
 
-        try (Connection con = conexi(); 
+        try (Connection con = Conexion.conexi();
              PreparedStatement ps = con.prepareStatement(sql)) {
             
+            // Establecemos el parámetro del nombre del sitio
             ps.setString(1, nombreSitio);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                int idTipoServicio = rs.getInt("id");
-                String nombreTipoServicio = rs.getString("tipo");
-                serviciosPorTipo.put(idTipoServicio, nombreTipoServicio);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    // Se agrega el id y el nombre del servicio al map.
+                    serviciosMap.put(rs.getInt("id"), rs.getString("nombre_servicio"));
+                }
             }
-
-            rs.close();
-            ps.close();
-            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return serviciosPorTipo;
+        
+        return serviciosMap;
     }
     
-    public void cargarEstrellas(vista_sitios_turisticos vista, boolean click)
-    {
-        if(click == false)
-        {
-            String foto = "C:\\Users\\userx\\Documents\\Java ADSO\\SitiosTuristicos\\src\\imagenes\\estrella.png";
-            ImageIcon icon = new ImageIcon(foto);
+    public void cargarEstrellas(vista_sitios_turisticos vista, boolean click) {
+        if (!click) {
+            String foto = "/img/estrella.png"; // Ruta relativa dentro del proyecto
+            URL url = getClass().getResource(foto);
 
+            if (url == null) {
+                System.err.println("No se encontró la imagen: " + foto);
+                return;
+            }
+
+            ImageIcon icon = new ImageIcon(url);
             Image image = icon.getImage();
-
-            Image scaledImage = image.getScaledInstance(vista.estrella1.getWidth(), vista.estrella1.getHeight(), Image.SCALE_SMOOTH);
-
+            Image scaledImage = image.getScaledInstance(
+                vista.estrella1.getWidth(), 
+                vista.estrella1.getHeight(), 
+                Image.SCALE_SMOOTH
+            );
             ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+            // Aplicar la imagen a las 5 estrellas
             vista.estrella1.setText(null);
             vista.estrella1.setIcon(scaledIcon);
 
@@ -175,45 +176,29 @@ public class modelo_sitios_turisticos {
             vista.estrella5.setIcon(scaledIcon);
         }
     }
-    
-    public void estrellaCambiarColor(vista_sitios_turisticos vista, int numeroEstrella)
-    {
-        String foto = "C:\\Users\\userx\\Documents\\Java ADSO\\SitiosTuristicos\\src\\imagenes\\estrellaColor.png";
-        ImageIcon icon = new ImageIcon(foto);
 
-        Image image = icon.getImage();
+    public void estrellaCambiarColor(vista_sitios_turisticos vista, int numeroEstrella) {
+        String foto = "/img/estrellaColor.png"; // Ruta relativa desde recursos (src/imagenes/)
+        URL url = getClass().getResource(foto);
 
-        Image scaledImage = image.getScaledInstance(vista.estrella1.getWidth(), vista.estrella1.getHeight(), Image.SCALE_SMOOTH);
-
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        vista.estrella1.setText(null);
-        vista.estrella1.setIcon(scaledIcon);
-        
-        if(numeroEstrella > 1)
-        {
-            vista.estrella2.setText(null);
-            vista.estrella2.setIcon(scaledIcon);
-            
-            if(numeroEstrella > 2)
-            {
-                vista.estrella3.setText(null);
-                vista.estrella3.setIcon(scaledIcon);
-                
-                if(numeroEstrella > 3)
-                {
-                    vista.estrella4.setText(null);
-                    vista.estrella4.setIcon(scaledIcon);
-                    
-                    if(numeroEstrella > 4)
-                    {
-                        vista.estrella5.setText(null);
-                        vista.estrella5.setIcon(scaledIcon);
-                    }
-                }
-            }
+        if (url == null) {
+            System.err.println("No se encontró la imagen: " + foto);
+            return;
         }
+
+        ImageIcon icon = new ImageIcon(url);
+        Image image = icon.getImage();
+        Image scaledImage = image.getScaledInstance(vista.estrella1.getWidth(), vista.estrella1.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+        // Cambiar iconos según el número de estrella
+        if (numeroEstrella >= 1) vista.estrella1.setIcon(scaledIcon);
+        if (numeroEstrella >= 2) vista.estrella2.setIcon(scaledIcon);
+        if (numeroEstrella >= 3) vista.estrella3.setIcon(scaledIcon);
+        if (numeroEstrella >= 4) vista.estrella4.setIcon(scaledIcon);
+        if (numeroEstrella >= 5) vista.estrella5.setIcon(scaledIcon);
     }
-    
+
     public static void insertarCalificacion(int estrellas, String nombreSitio) {
         String correo = "ejemplo@gmail.com";
         String comentario = ""; // puedes agregar uno si quieres
@@ -261,4 +246,111 @@ public class modelo_sitios_turisticos {
         } 
         
     }
+    
+    public String obtenerImagenComoLlegarPorSitio(String nombreSitio) {
+        String rutaImagen = null;
+
+        String sql = "SELECT i.imagen " +
+                     "FROM imagenes i " +
+                     "JOIN sitios_interes s ON i.id_sitio_fk = s.id " +
+                     "JOIN tipo_servicio ts ON i.id_tipo_servicio_fk = ts.id " +
+                     "WHERE s.nombre_sitio = ? AND ts.tipo = 'Como llegar' " +
+                     "LIMIT 1";
+
+        try (Connection con = conexi(); // Tu método para obtener conexión
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, nombreSitio);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                rutaImagen = rs.getString("imagen");
+            }
+
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rutaImagen;
+    }
+    
+    public String obtenerImagen360PorSitio(String nombreSitio) {
+        String rutaImagen = null;
+
+        String sql = "SELECT i.imagen " +
+                     "FROM imagenes i " +
+                     "JOIN sitios_interes s ON i.id_sitio_fk = s.id " +
+                     "JOIN tipo_servicio ts ON i.id_tipo_servicio_fk = ts.id " +
+                     "WHERE s.nombre_sitio = ? AND ts.tipo = 'img360' " +
+                     "LIMIT 1";
+
+        try (Connection con = conexi(); // Tu método para obtener la conexión
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, nombreSitio);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                rutaImagen = rs.getString("imagen");
+            }
+
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rutaImagen;
+    }
+    
+    public void mostrarImagen(String ruta, vista_sitios_turisticos vista) {
+        java.net.URL url = getClass().getResource(ruta);
+
+        if (url == null) {
+            System.err.println("No se encontró la imagen en: " + ruta);
+            vista.img.setText("Imagen no encontrada");
+            vista.img.setIcon(null);
+            return;
+        }
+
+        ImageIcon icon = new ImageIcon(url);
+        Image image = icon.getImage();
+        Image scaledImage = image.getScaledInstance(
+            vista.img.getWidth(),
+            vista.img.getHeight(),
+            Image.SCALE_SMOOTH
+        );
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+        vista.img.setText(null);
+        vista.img.setIcon(scaledIcon);
+    }
+
+    
+    public String obtenerImagenRestaurantePorSitio(String nombreSitio) {
+        String rutaImagen = null;
+
+        String query = "SELECT img.imagen " +
+                       "FROM imagenes img " +
+                       "JOIN sitios_interes si ON img.id_sitio_fk = si.id " +
+                       "JOIN tipo_servicio ts ON img.id_tipo_servicio_fk = ts.id " +
+                       "WHERE si.nombre_sitio = ? AND ts.tipo = 'Restaurantes' LIMIT 1";
+
+        try (Connection conn = conexi();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, nombreSitio);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                rutaImagen = rs.getString("imagen");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rutaImagen;
+    }
+
 }
