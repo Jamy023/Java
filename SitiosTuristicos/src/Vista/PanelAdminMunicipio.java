@@ -62,8 +62,10 @@ public class PanelAdminMunicipio extends JFrame {
      * Constructor para crear el panel como un JFrame independiente
      * @param nombreMunicipio Nombre del municipio a administrar
      */
-    public PanelAdminMunicipio(String nombreMunicipio) {
+    public PanelAdminMunicipio(String nombreMunicipio ) {
         this.nombreMunicipio = nombreMunicipio;
+
+
         this.controlador = new ControladorTurismo();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
@@ -80,6 +82,7 @@ public class PanelAdminMunicipio extends JFrame {
     }
     
     private void initComponents() {
+         cargarDatos();
         setUndecorated(true);
         // Panel superior con título
         JPanel headerPanel = new JPanel(new BorderLayout());
@@ -164,7 +167,7 @@ public class PanelAdminMunicipio extends JFrame {
         add(actionPanel, BorderLayout.SOUTH);
     }
     
-    private void cargarDatos() {
+    public void cargarDatos() {
         try {
             // Cargar estadísticas del municipio actual
             int[] estadisticas = controlador.obtenerEstadisticasMunicipio(nombreMunicipio);
@@ -321,7 +324,7 @@ public class PanelAdminMunicipio extends JFrame {
         tableTitle.setForeground(COLOR_PRIMARY_DARK);
         
         // Botón para agregar nuevo sitio
-        JButton addButton = new JButton("+ Nuevo");
+        JButton addButton = new JButton("");
         addButton.setBackground(COLOR_PRIMARY);
         addButton.setForeground(COLOR_TEXT_LIGHT);
         addButton.setBorderPainted(false);
@@ -334,8 +337,9 @@ public class PanelAdminMunicipio extends JFrame {
             // Aquí iría la lógica para mostrar un formulario de nuevo sitio
         });
         
+        
         tableHeaderPanel.add(tableTitle, BorderLayout.WEST);
-        tableHeaderPanel.add(addButton, BorderLayout.EAST);
+     
         
         // Añadir a panel principal
         tablePanel.add(tableHeaderPanel, BorderLayout.NORTH);
@@ -402,9 +406,11 @@ public Object getCellEditorValue() {
             // Obtener el valor como String y convertirlo a Integer
             String idStr = table.getValueAt(row, 0).toString();
             int idSitio = Integer.parseInt(idStr);
+            String nombreMunicipio = ""; // Reemplaza esto con el código para obtener el municipio del usuario
             
             // Crear y mostrar la ventana de edición
-            EditarSitioView ventanaEdicion = new EditarSitioView(controlador, idSitio);
+            EditarSitioView ventanaEdicion = new EditarSitioView(controlador, idSitio , PanelAdminMunicipio.this
+                                                                                                                    );
             ventanaEdicion.setVisible(true);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(button, 
@@ -431,8 +437,9 @@ public boolean stopCellEditing() {
         int row = table.getSelectedRow();
         int sitioId = (int) table.getValueAt(row, 0); // Asumiendo que el ID está en la columna 0
         
-        // Abrir la ventana de edición
-        EditarSitioView editarView = new EditarSitioView(controlador, sitioId);
+        // Abrir la ventana de ediciónsitioId
+        EditarSitioView editarView = newEditarSitioView(controlador, sitioId , PanelAdminMunicipio.this);
+                                                                                                                  
         editarView.setVisible(true);
     } else if ("Eliminar".equals(label)) {
         // Código para eliminar

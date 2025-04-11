@@ -6,6 +6,7 @@ import Modelo.TipoSitioInteres;
 import Modelo.Municipio;
 import Modelo.SitioInteres;
 import Vista.EditarSitioView;
+import Vista.PanelAdminMunicipio;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,35 +56,21 @@ public class ControladorTurismo {
         }
     }
     
-    // Agregar nuevo sitio
-    public boolean agregarSitio(SitioInteres sitio) {
-        try {
-            return sitioDAO.agregar(sitio);
-        } catch (SQLException e) {
-            System.err.println("Error al agregar sitio: " + e.getMessage());
-            return false;
-        }
-    }
+
     
     // Actualizar sitio existente
     public boolean actualizarSitio(SitioInteres sitio) {
         try {
             return sitioDAO.actualizar(sitio);
+          
+            
         } catch (SQLException e) {
             System.err.println("Error al actualizar sitio: " + e.getMessage());
             return false;
         }
     }
     
-    // Eliminar sitio
-    public boolean eliminarSitio(int id) {
-        try {
-            return sitioDAO.eliminar(id);
-        } catch (SQLException e) {
-            System.err.println("Error al eliminar sitio: " + e.getMessage());
-            return false;
-        }
-    }
+  
     
     // Obtener todos los tipos de sitio
     public List<TipoSitioInteres> obtenerTiposSitioInteres() {
