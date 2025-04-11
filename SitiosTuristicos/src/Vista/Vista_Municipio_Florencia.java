@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Controlador.Controlador_Florencia;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -20,16 +21,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-
+import Vista.Vista_Municipio_Puerto_Rico;
 /**
  *
  * @author COMPUCENTER-DM
  */
 public class Vista_Municipio_Florencia extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Vista_Municipio_Florencia
-     */
     public Vista_Municipio_Florencia() {
         initComponents();
      
@@ -37,10 +35,22 @@ public class Vista_Municipio_Florencia extends javax.swing.JFrame {
         foto(lbl_foto, "src\\img\\florencia.png");
         aplicarEstiloEstetico(btn_las_pavas);
         aplicarEstiloEstetico(btn_cascada);
-        aplicarEstiloEstetico(jButton3);
-        
+        aplicarEstiloEstetico(btn_Reserva_Natural);
+       
     }
-       public static void aplicarEstiloEstetico(JButton boton) {
+    public JButton getBtn_Las_Pavas() {
+            return btn_las_pavas;
+    }
+
+    public JButton getBtn_cascada() {
+        return btn_cascada;
+    }
+
+    public JButton getBtn_Reserva_Natural() {
+        return btn_Reserva_Natural;
+    }
+    
+    public static void aplicarEstiloEstetico(JButton boton) {
         boton.setFont(new Font("Segoe UI", Font.BOLD, 16));
         boton.setForeground(new Color(33, 37, 41)); // Gris oscuro sobrio
         boton.setBackground(new Color(144, 238, 144)); // Verde suave estilo SENA
@@ -95,7 +105,7 @@ public class Vista_Municipio_Florencia extends javax.swing.JFrame {
 
         btn_las_pavas = new javax.swing.JButton();
         btn_cascada = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btn_Reserva_Natural = new javax.swing.JButton();
         lbl_foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -115,9 +125,9 @@ public class Vista_Municipio_Florencia extends javax.swing.JFrame {
         btn_cascada.setText("Cascada la Avispa ");
         getContentPane().add(btn_cascada, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 200, 50));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
-        jButton3.setText("Reserva Las Palmas");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 80, 220, 40));
+        btn_Reserva_Natural.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
+        btn_Reserva_Natural.setText("Reserva Las Palmas");
+        getContentPane().add(btn_Reserva_Natural, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 80, 220, 40));
 
         lbl_foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/florencia.png"))); // NOI18N
         lbl_foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -156,15 +166,17 @@ public class Vista_Municipio_Florencia extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Vista_Municipio_Florencia().setVisible(true);
+                Vista_Municipio_Florencia vista = new Vista_Municipio_Florencia();
+                Controlador_Florencia controlador = new Controlador_Florencia(vista);
+                vista.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_cascada;
+    public javax.swing.JButton btn_Reserva_Natural;
+    public javax.swing.JButton btn_cascada;
     public javax.swing.JButton btn_las_pavas;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel lbl_foto;
     // End of variables declaration//GEN-END:variables
 }

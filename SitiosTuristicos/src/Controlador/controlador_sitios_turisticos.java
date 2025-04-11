@@ -18,7 +18,7 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import vistas.VentanaTuristica;
+import Vista.VentanaTuristica;
 import javax.swing.Timer;
 
 

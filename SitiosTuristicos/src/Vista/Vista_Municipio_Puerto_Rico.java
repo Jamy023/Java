@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.Controlador_Florencia;
+import Controlador.Controlador_Puerto_Rico;
 import static Vista.VIsta_Municipio_Doncello.aplicarEstiloEstetico;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -32,10 +34,22 @@ public class Vista_Municipio_Puerto_Rico extends javax.swing.JFrame {
     public Vista_Municipio_Puerto_Rico() {
         initComponents();
         foto(lbl_foto, "src\\img\\ puerto rico.png");
-        aplicarEstiloEstetico(btn_las_pavas);
-        aplicarEstiloEstetico(btn_cascada);
-        aplicarEstiloEstetico(jButton3);
+        aplicarEstiloEstetico(btn_Pozo_Frio);
+        aplicarEstiloEstetico(btn_Salto_Tigre);
+        aplicarEstiloEstetico(btn_Cascada_Salado);
     }
+    public JButton getBtn_Pozo_Frio() {
+            return btn_Pozo_Frio;
+    }
+
+    public JButton getBtn_Salto_Tigre() {
+        return btn_Salto_Tigre;
+    }
+
+    public JButton getBtn_Cascada_Salado() {
+        return btn_Cascada_Salado;
+    }
+    
     public static void aplicarEstiloEstetico(JButton boton) {
         boton.setFont(new Font("Segoe UI", Font.BOLD, 16));
         boton.setForeground(new Color(33, 37, 41)); // Gris oscuro sobrio
@@ -93,31 +107,31 @@ public class Vista_Municipio_Puerto_Rico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton3 = new javax.swing.JButton();
-        btn_cascada = new javax.swing.JButton();
-        btn_las_pavas = new javax.swing.JButton();
+        btn_Cascada_Salado = new javax.swing.JButton();
+        btn_Salto_Tigre = new javax.swing.JButton();
+        btn_Pozo_Frio = new javax.swing.JButton();
         lbl_foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(320, 150));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
-        jButton3.setText("Cascada El Salado ");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 50, 200, 40));
+        btn_Cascada_Salado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
+        btn_Cascada_Salado.setText("Cascada El Salado ");
+        getContentPane().add(btn_Cascada_Salado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 50, 200, 40));
 
-        btn_cascada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
-        btn_cascada.setText("Salto Del Tigre");
-        getContentPane().add(btn_cascada, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 200, 40));
+        btn_Salto_Tigre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
+        btn_Salto_Tigre.setText("Salto Del Tigre");
+        getContentPane().add(btn_Salto_Tigre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 200, 40));
 
-        btn_las_pavas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
-        btn_las_pavas.setText("Pozo Montefrio ");
-        btn_las_pavas.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_Pozo_Frio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
+        btn_Pozo_Frio.setText("Pozo Montefrio ");
+        btn_Pozo_Frio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_las_pavasMouseClicked(evt);
+                btn_Pozo_FrioMouseClicked(evt);
             }
         });
-        getContentPane().add(btn_las_pavas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 200, 50));
+        getContentPane().add(btn_Pozo_Frio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 200, 50));
 
         lbl_foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/doncello.png"))); // NOI18N
         lbl_foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -126,9 +140,9 @@ public class Vista_Municipio_Puerto_Rico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_las_pavasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_las_pavasMouseClicked
+    private void btn_Pozo_FrioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Pozo_FrioMouseClicked
 
-    }//GEN-LAST:event_btn_las_pavasMouseClicked
+    }//GEN-LAST:event_btn_Pozo_FrioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -160,15 +174,17 @@ public class Vista_Municipio_Puerto_Rico extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Vista_Municipio_Puerto_Rico().setVisible(true);
+                Vista_Municipio_Puerto_Rico vista = new Vista_Municipio_Puerto_Rico();
+                Controlador_Puerto_Rico controlador = new Controlador_Puerto_Rico(vista);
+                vista.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_cascada;
-    public javax.swing.JButton btn_las_pavas;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btn_Cascada_Salado;
+    public javax.swing.JButton btn_Pozo_Frio;
+    private javax.swing.JButton btn_Salto_Tigre;
     private javax.swing.JLabel lbl_foto;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.Controlador_Doncello;
+import Controlador.Controlador_Florencia;
 import static Vista.Vista_Municipio_Florencia.aplicarEstiloEstetico;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -32,9 +34,20 @@ public class VIsta_Municipio_Doncello extends javax.swing.JFrame {
     public VIsta_Municipio_Doncello() {
         initComponents();
         foto(lbl_foto, "src\\img\\doncello.png");
-        aplicarEstiloEstetico(btn_las_pavas);
-        aplicarEstiloEstetico(btn_cascada);
-        aplicarEstiloEstetico(jButton3);
+        aplicarEstiloEstetico(btn_Anayancito);
+        aplicarEstiloEstetico(btn_Fin_Estres);
+        aplicarEstiloEstetico(btn_Munay);
+    }
+    public JButton getBtn_Anayancito() {
+            return btn_Anayancito;
+    }
+
+    public JButton getBtn_Fin_Estres() {
+        return btn_Fin_Estres;
+    }
+
+    public JButton getBtn_Munay() {
+        return btn_Munay;
     }
     public static void aplicarEstiloEstetico(JButton boton) {
         boton.setFont(new Font("Segoe UI", Font.BOLD, 16));
@@ -93,31 +106,31 @@ public class VIsta_Municipio_Doncello extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_cascada = new javax.swing.JButton();
-        btn_las_pavas = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btn_Fin_Estres = new javax.swing.JButton();
+        btn_Anayancito = new javax.swing.JButton();
+        btn_Munay = new javax.swing.JButton();
         lbl_foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(320, 150));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_cascada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
-        btn_cascada.setText("Cascada Fin Del Estres ");
-        getContentPane().add(btn_cascada, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 460, 210, 40));
+        btn_Fin_Estres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
+        btn_Fin_Estres.setText("Cascada Fin Del Estres ");
+        getContentPane().add(btn_Fin_Estres, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 460, 210, 40));
 
-        btn_las_pavas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
-        btn_las_pavas.setText("Cascada Anayancito");
-        btn_las_pavas.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_Anayancito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
+        btn_Anayancito.setText("Cascada Anayancito");
+        btn_Anayancito.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_las_pavasMouseClicked(evt);
+                btn_AnayancitoMouseClicked(evt);
             }
         });
-        getContentPane().add(btn_las_pavas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 220, 50));
+        getContentPane().add(btn_Anayancito, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 220, 50));
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
-        jButton3.setText("Cascada El Salado ");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 30, 200, 40));
+        btn_Munay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
+        btn_Munay.setText("Cascada El Salado ");
+        getContentPane().add(btn_Munay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 30, 200, 40));
 
         lbl_foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/doncello.png"))); // NOI18N
         lbl_foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -126,9 +139,9 @@ public class VIsta_Municipio_Doncello extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_las_pavasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_las_pavasMouseClicked
+    private void btn_AnayancitoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_AnayancitoMouseClicked
 
-    }//GEN-LAST:event_btn_las_pavasMouseClicked
+    }//GEN-LAST:event_btn_AnayancitoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -160,15 +173,17 @@ public class VIsta_Municipio_Doncello extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VIsta_Municipio_Doncello().setVisible(true);
+                VIsta_Municipio_Doncello vista = new VIsta_Municipio_Doncello();
+                Controlador_Doncello controlador = new Controlador_Doncello(vista);
+                vista.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_cascada;
-    public javax.swing.JButton btn_las_pavas;
-    private javax.swing.JButton jButton3;
+    public javax.swing.JButton btn_Anayancito;
+    public javax.swing.JButton btn_Fin_Estres;
+    public javax.swing.JButton btn_Munay;
     private javax.swing.JLabel lbl_foto;
     // End of variables declaration//GEN-END:variables
 }
