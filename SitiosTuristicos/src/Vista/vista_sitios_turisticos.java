@@ -233,7 +233,9 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         Servicios = new javax.swing.JPanel();
         btn_vista360 = new javax.swing.JButton();
         btn_calificar = new javax.swing.JButton();
+        lblPrecio = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
+        lblCalificacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(245, 245, 245));
@@ -369,8 +371,16 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         btn_calificar.setText("Calificar");
         getContentPane().add(btn_calificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1670, 970, -1, -1));
 
+        lblPrecio.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblPrecio.setText("jLabel1");
+        getContentPane().add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 530, 190, 60));
+
         fondo.setBackground(new java.awt.Color(245, 245, 245));
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
+
+        lblCalificacion.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblCalificacion.setText("jLabel1");
+        getContentPane().add(lblCalificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 630, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -581,7 +591,7 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vista_sitios_turisticos("Cascada la Avispa").setVisible(true);
+                new vista_sitios_turisticos("Las Pavas").setVisible(true);
             }
         });
     }
@@ -598,8 +608,10 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
     public javax.swing.JLabel estrella5;
     public javax.swing.JLabel fondo;
     public javax.swing.JLabel img;
+    public javax.swing.JLabel lblCalificacion;
     public javax.swing.JLabel lblDescripcion;
     public javax.swing.JLabel lblNombre_sitio;
+    public javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lbl_descripcion;
     private javax.swing.JLabel lbl_servicios;
     // End of variables declaration//GEN-END:variables

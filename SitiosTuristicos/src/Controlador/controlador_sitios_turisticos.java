@@ -44,7 +44,7 @@ public class controlador_sitios_turisticos implements ActionListener{
     
     public void iniciar() {
         // Obtener la descripción y el precio del sitio
-        String descripcionYPrecio = modelo.obtenerDescripcionYPrecioPorSitio(sitio_turistico);
+        String descripcionYPrecio = modelo.obtenerDescripcionPorSitio(sitio_turistico);
 
         
         vista.setTitle("Sitios turisticos");
@@ -78,6 +78,10 @@ public class controlador_sitios_turisticos implements ActionListener{
         vista.lblDescripcion.setText("<html>" + descripcionYPrecio.replace("\n", "<br>") + "</html>");
         cargarServicios(sitio_turistico);
         
+        vista.lblPrecio.setText("Precio: " + String.valueOf(modelo.obtenerPrecioPorSitio(sitio_turistico)));
+        
+        vista.lblCalificacion.setText("Calificacion: " + String.valueOf(modelo.obtenerPromedioEstrellasPorSitio(sitio_turistico)));
+        
         modelo.cargarEstrellas(vista, false);
     }
     
@@ -99,7 +103,8 @@ public class controlador_sitios_turisticos implements ActionListener{
             btnServicio.addActionListener(e -> {
                 switch (tipoServicio) {
                     case "Parqueadero":
-                        JOptionPane.showMessageDialog(null, "Ya estás viendo un sitio de interés.");
+                        restaurante par = new restaurante(modelo.obtenerImagenParqueaderoPorSitio(sitio_turistico));
+                        par.setVisible(true);
                         break;
                     case "Como llegar":
                         comoLlegar mostrar = new comoLlegar(modelo.obtenerImagenComoLlegarPorSitio(sitio_turistico));
@@ -110,7 +115,8 @@ public class controlador_sitios_turisticos implements ActionListener{
                         res.setVisible(true);
                         break;
                     case "Alojamiento":
-                        JOptionPane.showMessageDialog(null, "Mostrando opciones de alojamiento.");
+                        restaurante re = new restaurante(modelo.obtenerImagenAlojamientoPorSitio(sitio_turistico));
+                        re.setVisible(true);
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Servicio no reconocido: " + tipoServicio);
@@ -131,8 +137,15 @@ public class controlador_sitios_turisticos implements ActionListener{
             modelo_sitios_turisticos.insertarCalificacion(vista.numeroEstrella, sitio_turistico);   
         }
         else if(e.getSource() == vista.btn_vista360) {
-            VentanaTuristica foto360 = new VentanaTuristica(modelo.obtenerImagen360PorSitio(sitio_turistico));
-            foto360.setVisible(true);
+            String ruta360 = modelo.obtenerImagen360PorSitio(sitio_turistico);
+
+            if (ruta360 != null && !ruta360.isEmpty()) {
+                VentanaTuristica foto360 = new VentanaTuristica(ruta360);
+                foto360.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró la imagen 360° para el sitio: " + sitio_turistico);
+            }
+
         }
     }
 }

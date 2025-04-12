@@ -59,61 +59,78 @@ public class modelo_sitios_turisticos {
         return imagenesPorServicio;
     }
      
-    public String obtenerDescripcionYPrecioPorSitio(String nombreSitio) {
+    public String obtenerDescripcionPorSitio(String nombreSitio) {
         String descripcion = null;
+        String queryInfo = "SELECT descripcion FROM sitios_interes WHERE nombre_sitio = ?";
+
+        try (Connection con = conexi();
+             PreparedStatement stmtInfo = con.prepareStatement(queryInfo)) {
+
+            stmtInfo.setString(1, nombreSitio);
+            try (ResultSet rsInfo = stmtInfo.executeQuery()) {
+                if (rsInfo.next()) {
+                    descripcion = rsInfo.getString("descripcion");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Error al obtener la descripción del sitio: " + e.getMessage();
+        }
+
+        return descripcion != null ? descripcion : "No se encontró descripción para el sitio: " + nombreSitio;
+    }
+    
+    public double obtenerPrecioPorSitio(String nombreSitio) {
         double precio = 0.0;
+        String queryInfo = "SELECT precio FROM sitios_interes WHERE nombre_sitio = ?";
+
+        try (Connection con = conexi();
+             PreparedStatement stmtInfo = con.prepareStatement(queryInfo)) {
+
+            stmtInfo.setString(1, nombreSitio);
+            try (ResultSet rsInfo = stmtInfo.executeQuery()) {
+                if (rsInfo.next()) {
+                    precio = rsInfo.getDouble("precio");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;  // Indicar error
+        }
+
+        return precio;
+    }
+    
+    public double obtenerPromedioEstrellasPorSitio(String nombreSitio) {
         double promedioEstrellas = 0.0;
-
-        // Consulta para descripción y precio
-        String queryInfo = "SELECT descripcion, precio FROM sitios_interes WHERE nombre_sitio = ?";
-
-        // Consulta para obtener promedio de estrellas usando subconsulta
         String queryCalificacion = 
             "SELECT AVG(c.estrellas) AS promedio " +
             "FROM calificaciones c " +
             "JOIN sitios_interes s ON c.id_sitio_fk = s.id " +
             "WHERE s.nombre_sitio = ?";
 
-        try {
-            Connection con = conexi();
+        try (Connection con = conexi();
+             PreparedStatement stmtCalif = con.prepareStatement(queryCalificacion)) {
 
-            // 1. Obtener descripción y precio
-            PreparedStatement stmtInfo = con.prepareStatement(queryInfo);
-            stmtInfo.setString(1, nombreSitio);
-            ResultSet rsInfo = stmtInfo.executeQuery();
-
-            if (rsInfo.next()) {
-                descripcion = rsInfo.getString("descripcion");
-                precio = rsInfo.getDouble("precio");
-            }
-
-            rsInfo.close();
-            stmtInfo.close();
-
-            // 2. Obtener calificación promedio
-            PreparedStatement stmtCalif = con.prepareStatement(queryCalificacion);
             stmtCalif.setString(1, nombreSitio);
-            ResultSet rsCalif = stmtCalif.executeQuery();
-
-            if (rsCalif.next()) {
-                promedioEstrellas = rsCalif.getDouble("promedio");
+            try (ResultSet rsCalif = stmtCalif.executeQuery()) {
+                if (rsCalif.next()) {
+                    promedioEstrellas = rsCalif.getDouble("promedio");
+                }
             }
-
-            rsCalif.close();
-            stmtCalif.close();
-            con.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return "Error al obtener los datos del sitio: " + e.getMessage();
+            return -1;  // Indicar error
         }
 
-        if (descripcion == null) {
-            return "No se encontró información para el sitio: " + nombreSitio;
-        }
-
-        return descripcion + "\nPrecio De Entrada: $" + precio + "\nCalificación Promedio: " + String.format("%.1f", promedioEstrellas) + " estrellas";
+        return promedioEstrellas;
     }
+
+
+
     
     public Map<Integer, String> obtenerServiciosPorSitio(String nombreSitio) {
         Map<Integer, String> serviciosMap = new HashMap<>();
@@ -276,49 +293,34 @@ public class modelo_sitios_turisticos {
     }
     
     public String obtenerImagen360PorSitio(String nombreSitio) {
-    String rutaImagen = "";
-    String sql = """
-                 SELECT i.imagen 
-                 FROM imagenes i 
-                 JOIN sitios_interes s ON i.id_sitio_fk = s.id 
-                 JOIN tipo_servicio ts ON i.id_tipo_servicio_fk = ts.id 
-                 WHERE s.nombre_sitio COLLATE utf8mb4_general_ci = ? 
-                   AND ts.tipo = 'img360'
-                 ORDER BY i.id DESC 
-                 LIMIT 1""";
+    String rutaImagen = null;
 
-    try (Connection con = conexi();  // Asume que conexi() retorna la conexión
+    String sql = "SELECT i.imagen " +
+                 "FROM imagenes i " +
+                 "JOIN sitios_interes s ON i.id_sitio_fk = s.id " +
+                 "JOIN tipo_servicio ts ON i.id_tipo_servicio_fk = ts.id " +
+                 "WHERE s.nombre_sitio = ? AND ts.tipo = 'img360' " +
+                 "LIMIT 1";
+
+    try (Connection con = conexi(); // Tu método de conexión
          PreparedStatement ps = con.prepareStatement(sql)) {
 
         ps.setString(1, nombreSitio);
-        
-        try (ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                rutaImagen = rs.getString("imagen");
-            } else {
-                // Mensaje para sitios sin imagen 360
-                JOptionPane.showMessageDialog(
-                    null, 
-                    "⚠️ " + nombreSitio + " no tiene vista 360 disponible",
-                    "Recurso no encontrado", 
-                    JOptionPane.WARNING_MESSAGE
-                );
-            }
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            rutaImagen = rs.getString("imagen");
         }
 
+        rs.close();
     } catch (SQLException e) {
-        // Mensaje para errores de base de datos
-        JOptionPane.showMessageDialog(
-            null, 
-            "Error al cargar la imagen: " + e.getMessage(),
-            "Error crítico", 
-            JOptionPane.ERROR_MESSAGE
-        );
         e.printStackTrace();
     }
 
     return rutaImagen;
 }
+
+
     
     public void mostrarImagen(String ruta, vista_sitios_turisticos vista) {
         java.net.URL url = getClass().getResource(ruta);

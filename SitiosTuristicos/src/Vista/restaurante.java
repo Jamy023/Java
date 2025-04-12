@@ -56,22 +56,12 @@ public class restaurante extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         btn_cerrar = new javax.swing.JButton();
         img = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Cerrar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 720, -1, -1));
 
         btn_cerrar.setText("Cerrar");
         btn_cerrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -84,17 +74,13 @@ public class restaurante extends javax.swing.JFrame {
                 btn_cerrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1172, 10, 110, 40));
+        getContentPane().add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 110, 40));
 
         img.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 720));
+        getContentPane().add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 770));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        this.dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
 
     private void btn_cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarMouseClicked
         this.dispose();
@@ -142,6 +128,5 @@ public class restaurante extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cerrar;
     private javax.swing.JLabel img;
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
