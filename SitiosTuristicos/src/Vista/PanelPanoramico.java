@@ -1,16 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package vistas;
+package vista;
 
-/**
- *
- * @author userx
- */
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class PanelPanoramico extends JLabel {
     private final Image imagenPanoramica;
@@ -20,12 +11,26 @@ public class PanelPanoramico extends JLabel {
     private int inicioArrastreX;
 
     public PanelPanoramico(String rutaImagen) {
-        imagenPanoramica = new ImageIcon(rutaImagen).getImage();
-        setPreferredSize(new Dimension(800, imagenPanoramica.getHeight(null))); 
+        // Se busca el recurso usando la ruta abreviada proporcionada
+        java.net.URL urlImagen = getClass().getResource(rutaImagen);
+        if (urlImagen != null) {
+            imagenPanoramica = new ImageIcon(urlImagen).getImage();
+        } else {
+            // Si no se encuentra, se asigna una imagen por defecto o se notifica el error
+            System.out.println("No se encontró la imagen en la ruta: " + rutaImagen);
+            imagenPanoramica = null;
+        }
 
+        // Establece el tamaño preferido basado en la imagen (si existe)
+        if (imagenPanoramica != null) {
+            setPreferredSize(new Dimension(800, imagenPanoramica.getHeight(null)));
+        } else {
+            setPreferredSize(new Dimension(800, 600));
+        }
+        
         // Timer para movimiento automático
         Timer timer = new Timer(30, e -> {
-            if (autoMovimiento) {
+            if (autoMovimiento && imagenPanoramica != null) {
                 posicionX -= velocidad;
                 if (posicionX <= -imagenPanoramica.getWidth(null)) {
                     posicionX = 0;
@@ -36,22 +41,22 @@ public class PanelPanoramico extends JLabel {
         timer.start();
 
         // Eventos del mouse para mover manualmente
-        addMouseListener(new MouseAdapter() {
+        addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(java.awt.event.MouseEvent e) {
                 inicioArrastreX = e.getX();
                 autoMovimiento = false;
             }
 
             @Override
-            public void mouseReleased(MouseEvent e) {
+            public void mouseReleased(java.awt.event.MouseEvent e) {
                 autoMovimiento = true;
             }
         });
 
-        addMouseMotionListener(new MouseMotionAdapter() {
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             @Override
-            public void mouseDragged(MouseEvent e) {
+            public void mouseDragged(java.awt.event.MouseEvent e) {
                 int desplazamiento = e.getX() - inicioArrastreX;
                 posicionX += desplazamiento;
                 inicioArrastreX = e.getX();
@@ -63,10 +68,12 @@ public class PanelPanoramico extends JLabel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int imgWidth = imagenPanoramica.getWidth(null);
-
-        // Dibuja la imagen dos veces para el efecto infinito
-        g.drawImage(imagenPanoramica, posicionX, 0, this);
-        g.drawImage(imagenPanoramica, posicionX + imgWidth, 0, this);
+        if (imagenPanoramica != null) {
+            int imgWidth = imagenPanoramica.getWidth(null);
+            // Dibuja la imagen dos veces para crear un efecto de desplazamiento infinito
+            g.drawImage(imagenPanoramica, posicionX, 0, this);
+            g.drawImage(imagenPanoramica, posicionX + imgWidth, 0, this);
+        }
     }
 }
+

@@ -18,7 +18,7 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
     /**
      * Creates new form vista_sitios_turisticos
      */
-    String foto ="C:\\Users\\userx\\Documents\\Java ADSO\\SitiosTuristicos\\src\\imagenes\\fondo.png";
+    String foto ="/img/fondo.png";
     Controlador.controlador_sitios_turisticos controlador;
     Modelo.modelo_sitios_turisticos modelo = new Modelo.modelo_sitios_turisticos();
     boolean click = false;
@@ -37,15 +37,30 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
     
     public void cargarFondo()
     {
-        ImageIcon icon = new ImageIcon(foto);
+                // Intenta obtener la URL del recurso usando la ruta abreviada
+        java.net.URL urlImagen = getClass().getResource(foto);
+        ImageIcon icon;
+        if(urlImagen != null) {
+            // Si se encuentra el recurso, crear el ImageIcon usando la URL
+            icon = new ImageIcon(urlImagen);
+        } else {
+            // Si no se encontró el recurso, se intenta cargar de forma directa (ruta completa o absoluta)
+            icon = new ImageIcon(foto);
+        }
 
         Image image = icon.getImage();
 
-        Image scaledImage = image.getScaledInstance(fondo.getWidth(), fondo.getHeight(), Image.SCALE_SMOOTH);
+        // Se obtiene el ancho y alto del componente (por ejemplo, un JLabel "fondo")
+        int ancho = fondo.getWidth();
+        int alto = fondo.getHeight();
 
+        // Redimensiona la imagen con escala suave
+        Image scaledImage = image.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
-      
+
+        // Asigna el ImageIcon escalado al JLabel
         fondo.setIcon(scaledIcon);
+
     }
 
     /**
@@ -78,12 +93,12 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         img.setText("jLabel1");
-        img.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        img.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 111, 990, 279));
 
         lblNombre_sitio.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 36)); // NOI18N
         lblNombre_sitio.setText("jLabel1");
-        getContentPane().add(lblNombre_sitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 28, 487, 60));
+        getContentPane().add(lblNombre_sitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 640, 60));
 
         jButton1.setBackground(new java.awt.Color(102, 102, 255));
         jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
@@ -95,11 +110,11 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         lblDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblDescripcion.setText("jLabel1");
         lblDescripcion.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, 383, 300));
+        getContentPane().add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 383, 330));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("DESCRIPCION DEL LUGAR");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 460, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel3.setText("Servicios disponibles");
@@ -409,7 +424,7 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vista_sitios_turisticos("Cascada la Avispa").setVisible(true);
+                new vista_sitios_turisticos("Las pavas").setVisible(true);
             }
         });
     }

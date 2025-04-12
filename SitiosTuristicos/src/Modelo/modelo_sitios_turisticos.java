@@ -353,4 +353,58 @@ public class modelo_sitios_turisticos {
         return rutaImagen;
     }
 
+    
+    public String obtenerImagenParqueaderoPorSitio(String nombreSitio) {
+        String rutaImagen = null;
+
+        String query = "SELECT img.imagen " +
+                       "FROM imagenes img " +
+                       "JOIN sitios_interes si ON img.id_sitio_fk = si.id " +
+                       "JOIN tipo_servicio ts ON img.id_tipo_servicio_fk = ts.id " +
+                       "WHERE si.nombre_sitio = ? AND ts.tipo = 'Parqueadero' LIMIT 1";
+
+        try (Connection conn = Conexion.conexi();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, nombreSitio);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                rutaImagen = rs.getString("imagen");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rutaImagen;
+    }
+
+    
+    public String obtenerImagenAlojamientoPorSitio(String nombreSitio) {
+        String rutaImagen = null;
+
+        String query = "SELECT img.imagen " +
+                       "FROM imagenes img " +
+                       "JOIN sitios_interes si ON img.id_sitio_fk = si.id " +
+                       "JOIN tipo_servicio ts ON img.id_tipo_servicio_fk = ts.id " +
+                       "WHERE si.nombre_sitio = ? AND ts.tipo = 'Alojamiento' LIMIT 1";
+
+        try (Connection conn = Conexion.conexi();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, nombreSitio);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                rutaImagen = rs.getString("imagen");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rutaImagen;
+    }
+
 }

@@ -18,8 +18,9 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import vistas.VentanaTuristica;
+
 import javax.swing.Timer;
+import vista.VentanaTuristica;
 
 
 /**
@@ -99,19 +100,20 @@ public class controlador_sitios_turisticos implements ActionListener{
             btnServicio.addActionListener(e -> {
                 switch (tipoServicio) {
                     case "Parqueadero":
-                        JOptionPane.showMessageDialog(null, "Ya estás viendo un sitio de interés.");
+                        restaurante par = new restaurante(modelo.obtenerImagenParqueaderoPorSitio(sitio_turistico));
+                        par.setVisible(true);
                         break;
                     case "Como llegar":
                         comoLlegar mostrar = new comoLlegar(modelo.obtenerImagenComoLlegarPorSitio(sitio_turistico));
                         mostrar.setVisible(true);
                         break;
                     case "Restaurantes":
-                        
                         restaurante res = new restaurante(modelo.obtenerImagenRestaurantePorSitio(sitio_turistico));
                         res.setVisible(true);
                         break;
                     case "Alojamiento":
-                        JOptionPane.showMessageDialog(null, "Mostrando opciones de alojamiento.");
+                        restaurante re = new restaurante(modelo.obtenerImagenAlojamientoPorSitio(sitio_turistico));
+                        re.setVisible(true);
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Servicio no reconocido: " + tipoServicio);
@@ -132,6 +134,7 @@ public class controlador_sitios_turisticos implements ActionListener{
             modelo_sitios_turisticos.insertarCalificacion(vista.numeroEstrella, sitio_turistico);   
         }
         else if(e.getSource() == vista.vista360) {
+
             VentanaTuristica foto360 = new VentanaTuristica(modelo.obtenerImagen360PorSitio(sitio_turistico));
             foto360.setVisible(true);
         }
