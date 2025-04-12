@@ -82,7 +82,7 @@ public class PanelAdminMunicipio extends JFrame {
     }
     
     private void initComponents() {
-         cargarDatos();
+        cargarDatos();
         setUndecorated(true);
         // Panel superior con título
         JPanel headerPanel = new JPanel(new BorderLayout());

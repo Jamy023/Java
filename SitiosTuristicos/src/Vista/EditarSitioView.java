@@ -47,7 +47,7 @@ public class EditarSitioView extends JFrame {
      * @param controlador Controlador de turismo
      * @param idSitio ID del sitio a editar
      */
-    public EditarSitioView(ControladorTurismo controlador, int idSitio ,PanelAdminMunicipio panelPadre) {
+    public EditarSitioView(ControladorTurismo controlador, int idSitio) {
         super("Gestión de Sitios Turísticos");
         this.controlador = controlador;
         this.panelPadre = panelPadre;

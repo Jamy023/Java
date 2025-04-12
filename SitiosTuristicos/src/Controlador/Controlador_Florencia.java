@@ -26,7 +26,7 @@ import java.awt.event.ActionListener;
         Object source = e.getSource();
 
         if (source == vista.getBtn_Las_Pavas()) {
-            abrirSitio("Cascada el Salado");
+            abrirSitio("Las pavas");
         } else if (source == vista.getBtn_cascada()) {
             abrirSitio("Cascada la Avispa");
         } else if (source == vista.getBtn_Reserva_Natural()) {

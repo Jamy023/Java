@@ -276,32 +276,49 @@ public class modelo_sitios_turisticos {
     }
     
     public String obtenerImagen360PorSitio(String nombreSitio) {
-        String rutaImagen = null;
+    String rutaImagen = null;
+    String sql = """
+                 SELECT i.imagen 
+                 FROM imagenes i 
+                 JOIN sitios_interes s ON i.id_sitio_fk = s.id 
+                 JOIN tipo_servicio ts ON i.id_tipo_servicio_fk = ts.id 
+                 WHERE s.nombre_sitio COLLATE utf8mb4_general_ci = ? 
+                   AND ts.tipo = 'img360'
+                 ORDER BY i.id DESC 
+                 LIMIT 1""";
 
-        String sql = "SELECT i.imagen " +
-                     "FROM imagenes i " +
-                     "JOIN sitios_interes s ON i.id_sitio_fk = s.id " +
-                     "JOIN tipo_servicio ts ON i.id_tipo_servicio_fk = ts.id " +
-                     "WHERE s.nombre_sitio = ? AND ts.tipo = 'img360' " +
-                     "LIMIT 1";
+    try (Connection con = conexi();  // Asume que conexi() retorna la conexión
+         PreparedStatement ps = con.prepareStatement(sql)) {
 
-        try (Connection con = conexi(); // Tu método para obtener la conexión
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setString(1, nombreSitio);
-            ResultSet rs = ps.executeQuery();
-
+        ps.setString(1, nombreSitio);
+        
+        try (ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
                 rutaImagen = rs.getString("imagen");
+            } else {
+                // Mensaje para sitios sin imagen 360
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "⚠️ " + nombreSitio + " no tiene vista 360 disponible",
+                    "Recurso no encontrado", 
+                    JOptionPane.WARNING_MESSAGE
+                );
             }
-
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
-        return rutaImagen;
+    } catch (SQLException e) {
+        // Mensaje para errores de base de datos
+        JOptionPane.showMessageDialog(
+            null, 
+            "Error al cargar la imagen: " + e.getMessage(),
+            "Error crítico", 
+            JOptionPane.ERROR_MESSAGE
+        );
+        e.printStackTrace();
     }
+
+    return rutaImagen;
+}
     
     public void mostrarImagen(String ruta, vista_sitios_turisticos vista) {
         java.net.URL url = getClass().getResource(ruta);

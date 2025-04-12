@@ -108,6 +108,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Menu_Principal().setVisible(true);
+                
             }
         });
     }
