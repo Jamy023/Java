@@ -106,6 +106,7 @@ public class ControladorTurismo {
         
         return estadisticas;
     }
-    // Método para abrir ventana de edición de sitio
+    
+    
 
 }

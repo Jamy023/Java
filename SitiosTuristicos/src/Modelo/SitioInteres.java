@@ -11,6 +11,8 @@ public class SitioInteres {
     private int idMunicipioFk;
     private float distancia;
     private int idTipoSitioFk;
+    private String nombreSitio2;
+    private Municipio municipio;
     
     // Campos adicionales para información relacionada
     private String nombreMunicipio;
@@ -30,6 +32,7 @@ public class SitioInteres {
     /**
      * Constructor con parámetros básicos
      */
+    
     public SitioInteres(String nombreSitio, String descripcion, double precio, 
                         int idMunicipioFk, float distancia, int idTipoSitioFk) {
         this.nombreSitio = nombreSitio;
@@ -59,14 +62,7 @@ public class SitioInteres {
         this.tieneAlimentacion = false;
         this.tieneTransporte = false;
     }
-
-    /**
-     * Constructor completo con ID y servicios
-     */
-    public SitioInteres(int id, String nombreSitio, String descripcion, double precio, 
-                        int idMunicipioFk, float distancia, int idTipoSitioFk,
-                        boolean tieneAlojamiento, boolean tieneAlimentacion, 
-                        boolean tieneTransporte) {
+    public SitioInteres(int id, String nombreSitio, String descripcion, double precio, int idMunicipioFk, float distancia, int idTipoSitioFk, String nombreSitio2, Municipio municipio, String nombreMunicipio, String tipoSitio, boolean tieneAlojamiento, boolean tieneAlimentacion, boolean tieneTransporte) {
         this.id = id;
         this.nombreSitio = nombreSitio;
         this.descripcion = descripcion;
@@ -74,6 +70,10 @@ public class SitioInteres {
         this.idMunicipioFk = idMunicipioFk;
         this.distancia = distancia;
         this.idTipoSitioFk = idTipoSitioFk;
+        this.nombreSitio2 = nombreSitio2;
+        this.municipio = municipio;
+        this.nombreMunicipio = nombreMunicipio;
+        this.tipoSitio = tipoSitio;
         this.tieneAlojamiento = tieneAlojamiento;
         this.tieneAlimentacion = tieneAlimentacion;
         this.tieneTransporte = tieneTransporte;
@@ -201,6 +201,22 @@ public class SitioInteres {
 
     public void setTipoSitio(String tipoSitio) {
         this.tipoSitio = tipoSitio;
+    }
+    public Municipio getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
+
+    // Getter y Setter para nombreSitio
+    public String getNombre2() {
+        return nombreSitio2;
+    }
+
+    public void setNombre2(String nombreSitio) {
+        this.nombreSitio = nombreSitio;
     }
     
     /**

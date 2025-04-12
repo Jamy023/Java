@@ -13,15 +13,21 @@ public class Municipio {
     private String nombreMunicipio;
     private String descripcion;
     private String bandera;
+    private String  nombre2;
     
     public Municipio() {
     }
 
-    public Municipio(int id, String nombreMunicipio, String descripcion, String bandera) {
+    public Municipio(int id, String nombreMunicipio, String descripcion, String bandera, String nombre2) {
         this.id = id;
         this.nombreMunicipio = nombreMunicipio;
         this.descripcion = descripcion;
         this.bandera = bandera;
+        this.nombre2 = nombre2;
+    }
+
+    public String getNombre2() {
+        return nombre2;
     }
 
     public int getId() {
@@ -55,6 +61,11 @@ public class Municipio {
     public void setBandera(String bandera) {
         this.bandera = bandera;
     }
+
+    public void setNombre2(String nombre2) {
+        this.nombre2 = nombre2;
+    }
+    
 
     @Override
     public String toString() {

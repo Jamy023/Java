@@ -276,7 +276,7 @@ public class modelo_sitios_turisticos {
     }
     
     public String obtenerImagen360PorSitio(String nombreSitio) {
-    String rutaImagen = null;
+    String rutaImagen = "";
     String sql = """
                  SELECT i.imagen 
                  FROM imagenes i 

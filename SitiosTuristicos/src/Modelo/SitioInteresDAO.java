@@ -416,4 +416,35 @@ private void cargarServicios(SitioInteres sitio) throws SQLException {
         
         return sitio;
     }
+    // En SitioInteresDAO.java
+    public List<SitioInteres> buscarSitiosPorTexto(String texto) throws SQLException {
+    List<SitioInteres> sitios = new ArrayList<>();
+    String query = "SELECT s.nombre_sitio, m.nombre_municipio " +
+                   "FROM sitios_interes s " +
+                   "JOIN Municipio m ON s.id_municipio_fk = m.id " +
+                   "WHERE s.nombre_sitio LIKE ? OR m.nombre_municipio LIKE ?";
+
+    try (Connection conn = Conexion.obtenerConexion();
+         PreparedStatement ps = conn.prepareStatement(query)) {
+
+        String search = "%" + texto + "%";  // Para buscar coincidencias parciales
+        ps.setString(1, search);
+        ps.setString(2, search);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                SitioInteres sitio = new SitioInteres();
+                sitio.setNombre(rs.getString("nombre_sitio"));
+                
+                Municipio municipio = new Municipio();
+                municipio.setNombre2(rs.getString("nombre_municipio"));
+                sitio.setMunicipio(municipio);  
+                
+                sitios.add(sitio);
+            }
+        }
+    }
+     return sitios;
+    }
+
 }

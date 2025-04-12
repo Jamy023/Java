@@ -6,10 +6,18 @@ package Vista;
 
 import Controlador.Menu_Principal_C;
 import Controlador.MenuPrincipalControlador;
+import Modelo.Municipio;
+import Modelo.SitioInteres;
+import Modelo.TipoSitioInteres;
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTextField;
 
 
 
@@ -19,7 +27,8 @@ public class Menu_Principal extends javax.swing.JFrame {
     public javax.swing.JButton jbt_admin;
     public javax.swing.JLabel jLabel6;
     public javax.swing.JLabel jlb_fondo;
-   
+
+      
     
     public Menu_Principal() {
         initComponents();
@@ -32,6 +41,8 @@ public class Menu_Principal extends javax.swing.JFrame {
         
         InicioSesion vistaLogin = new InicioSesion();
         MenuPrincipalControlador controlador = new MenuPrincipalControlador(vistaLogin,this);
+        
+
     }
     
     public void fondo(JLabel label, String ruta) {
@@ -40,6 +51,9 @@ public class Menu_Principal extends javax.swing.JFrame {
         label.setIcon(new ImageIcon(img));
 
     }
+    
+
+
     
 
     @SuppressWarnings("unchecked")
