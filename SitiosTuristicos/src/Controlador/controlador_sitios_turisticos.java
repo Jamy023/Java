@@ -38,8 +38,8 @@ public class controlador_sitios_turisticos implements ActionListener{
         this.sitio_turistico = sitio_turistico;
         this.imagenes = modelo.obtenerImagenesPorSitio(sitio_turistico);
         
-        vista.calificar.addActionListener(this);
-        vista.vista360.addActionListener(this);
+        vista.btn_calificar.addActionListener(this);
+        vista.btn_vista360.addActionListener(this);
     }
     
     public void iniciar() {
@@ -106,7 +106,6 @@ public class controlador_sitios_turisticos implements ActionListener{
                         mostrar.setVisible(true);
                         break;
                     case "Restaurantes":
-                        
                         restaurante res = new restaurante(modelo.obtenerImagenRestaurantePorSitio(sitio_turistico));
                         res.setVisible(true);
                         break;
@@ -128,10 +127,10 @@ public class controlador_sitios_turisticos implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == vista.calificar) {
+        if(e.getSource() == vista.btn_calificar) {
             modelo_sitios_turisticos.insertarCalificacion(vista.numeroEstrella, sitio_turistico);   
         }
-        else if(e.getSource() == vista.vista360) {
+        else if(e.getSource() == vista.btn_vista360) {
             VentanaTuristica foto360 = new VentanaTuristica(modelo.obtenerImagen360PorSitio(sitio_turistico));
             foto360.setVisible(true);
         }

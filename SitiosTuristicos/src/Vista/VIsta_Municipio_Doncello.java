@@ -5,7 +5,6 @@
 package Vista;
 
 import Controlador.Controlador_Doncello;
-import Controlador.Controlador_Florencia;
 import static Vista.Vista_Municipio_Florencia.aplicarEstiloEstetico;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -28,15 +27,16 @@ import javax.swing.JLabel;
  */
 public class VIsta_Municipio_Doncello extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VIsta_Municipio_Doncello
-     */
+    Controlador_Doncello controlador;
     public VIsta_Municipio_Doncello() {
         initComponents();
+        
+        controlador = new Controlador_Doncello(this);
         foto(lbl_foto, "src\\img\\doncello.png");
         aplicarEstiloEstetico(btn_Anayancito);
         aplicarEstiloEstetico(btn_Fin_Estres);
         aplicarEstiloEstetico(btn_Munay);
+        aplicarEstiloEstetico(btn_Volver);
     }
     public JButton getBtn_Anayancito() {
             return btn_Anayancito;
@@ -49,46 +49,7 @@ public class VIsta_Municipio_Doncello extends javax.swing.JFrame {
     public JButton getBtn_Munay() {
         return btn_Munay;
     }
-    public static void aplicarEstiloEstetico(JButton boton) {
-        boton.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        boton.setForeground(new Color(33, 37, 41)); // Gris oscuro sobrio
-        boton.setBackground(new Color(144, 238, 144)); // Verde suave estilo SENA
-        boton.setFocusPainted(false);
-        boton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        boton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        boton.setOpaque(false);
-
-        boton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                boton.setBackground(new Color(124, 218, 124)); // Un verde un poco más intenso
-                boton.repaint();
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                boton.setBackground(new Color(144, 238, 144));
-                boton.repaint();
-            }
-        });
-
-        // 🎨 Estilo gráfico personalizado (minimalista y redondeado)
-        boton.setUI(new javax.swing.plaf.basic.BasicButtonUI() {
-            @Override
-            public void paint(Graphics g, JComponent c) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                int w = c.getWidth();
-                int h = c.getHeight();
-
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(boton.getBackground());
-                g2.fillRoundRect(0, 0, w, h, 30, 30); // Bordes redondeados
-
-                g2.dispose();
-                super.paint(g, c);
-            }
-        });
-    }
+    
 
     public void foto(JLabel label, String ruta) {
         ImageIcon icon = new ImageIcon("src\\img\\doncello.png");
@@ -109,6 +70,7 @@ public class VIsta_Municipio_Doncello extends javax.swing.JFrame {
         btn_Fin_Estres = new javax.swing.JButton();
         btn_Anayancito = new javax.swing.JButton();
         btn_Munay = new javax.swing.JButton();
+        btn_Volver = new javax.swing.JButton();
         lbl_foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -129,8 +91,16 @@ public class VIsta_Municipio_Doncello extends javax.swing.JFrame {
         getContentPane().add(btn_Anayancito, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 220, 50));
 
         btn_Munay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
-        btn_Munay.setText("Cascada El Salado ");
+        btn_Munay.setText("Tierras Munay");
         getContentPane().add(btn_Munay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 30, 200, 40));
+
+        btn_Volver.setText("Volver");
+        btn_Volver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_VolverMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 40));
 
         lbl_foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/doncello.png"))); // NOI18N
         lbl_foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -142,6 +112,10 @@ public class VIsta_Municipio_Doncello extends javax.swing.JFrame {
     private void btn_AnayancitoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_AnayancitoMouseClicked
 
     }//GEN-LAST:event_btn_AnayancitoMouseClicked
+
+    private void btn_VolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_VolverMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_btn_VolverMouseClicked
 
     /**
      * @param args the command line arguments
@@ -173,10 +147,8 @@ public class VIsta_Municipio_Doncello extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                VIsta_Municipio_Doncello vista = new VIsta_Municipio_Doncello();
-                Controlador_Doncello controlador = new Controlador_Doncello(vista);
-                vista.setVisible(true);
-            }
+                new VIsta_Municipio_Doncello().setVisible(true);
+                        }
         });
     }
 
@@ -184,6 +156,7 @@ public class VIsta_Municipio_Doncello extends javax.swing.JFrame {
     public javax.swing.JButton btn_Anayancito;
     public javax.swing.JButton btn_Fin_Estres;
     public javax.swing.JButton btn_Munay;
+    public javax.swing.JButton btn_Volver;
     private javax.swing.JLabel lbl_foto;
     // End of variables declaration//GEN-END:variables
 }

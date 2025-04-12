@@ -5,11 +5,9 @@
 package Vista;
 
 import Controlador.Controlador_Florencia;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -21,21 +19,26 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import Vista.Vista_Municipio_Puerto_Rico;
+
 /**
  *
  * @author COMPUCENTER-DM
  */
 public class Vista_Municipio_Florencia extends javax.swing.JFrame {
+    Controlador_Florencia controlador;
 
     public Vista_Municipio_Florencia() {
         initComponents();
      
         
+        controlador = new Controlador_Florencia(this);
+        
         foto(lbl_foto, "src\\img\\florencia.png");
         aplicarEstiloEstetico(btn_las_pavas);
         aplicarEstiloEstetico(btn_cascada);
         aplicarEstiloEstetico(btn_Reserva_Natural);
+        aplicarEstiloEstetico(btn_Volver);
+        
        
     }
     public JButton getBtn_Las_Pavas() {
@@ -106,6 +109,7 @@ public class Vista_Municipio_Florencia extends javax.swing.JFrame {
         btn_las_pavas = new javax.swing.JButton();
         btn_cascada = new javax.swing.JButton();
         btn_Reserva_Natural = new javax.swing.JButton();
+        btn_Volver = new javax.swing.JButton();
         lbl_foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,13 +127,20 @@ public class Vista_Municipio_Florencia extends javax.swing.JFrame {
 
         btn_cascada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
         btn_cascada.setText("Cascada la Avispa ");
-        getContentPane().add(btn_cascada, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 200, 50));
+        getContentPane().add(btn_cascada, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 290, 50));
 
         btn_Reserva_Natural.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
         btn_Reserva_Natural.setText("Reserva Las Palmas");
-        getContentPane().add(btn_Reserva_Natural, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 80, 220, 40));
+        getContentPane().add(btn_Reserva_Natural, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 80, 270, 40));
 
-        lbl_foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/florencia.png"))); // NOI18N
+        btn_Volver.setText("Volver");
+        btn_Volver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_VolverMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 40));
+
         lbl_foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(lbl_foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 720));
 
@@ -139,6 +150,10 @@ public class Vista_Municipio_Florencia extends javax.swing.JFrame {
     private void btn_las_pavasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_las_pavasMouseClicked
         
     }//GEN-LAST:event_btn_las_pavasMouseClicked
+
+    private void btn_VolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_VolverMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_btn_VolverMouseClicked
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -166,15 +181,15 @@ public class Vista_Municipio_Florencia extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Vista_Municipio_Florencia vista = new Vista_Municipio_Florencia();
-                Controlador_Florencia controlador = new Controlador_Florencia(vista);
-                vista.setVisible(true);
+                
+                new Vista_Municipio_Florencia().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn_Reserva_Natural;
+    public javax.swing.JButton btn_Volver;
     public javax.swing.JButton btn_cascada;
     public javax.swing.JButton btn_las_pavas;
     private javax.swing.JLabel lbl_foto;

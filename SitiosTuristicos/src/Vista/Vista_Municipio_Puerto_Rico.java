@@ -4,9 +4,8 @@
  */
 package Vista;
 
-import Controlador.Controlador_Florencia;
+
 import Controlador.Controlador_Puerto_Rico;
-import static Vista.VIsta_Municipio_Doncello.aplicarEstiloEstetico;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -28,15 +27,15 @@ import javax.swing.JLabel;
  */
 public class Vista_Municipio_Puerto_Rico extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Vista_Municipio_Puerto_Rico
-     */
+  Controlador_Puerto_Rico controlador;
     public Vista_Municipio_Puerto_Rico() {
         initComponents();
+        controlador = new Controlador_Puerto_Rico(this);
         foto(lbl_foto, "src\\img\\ puerto rico.png");
         aplicarEstiloEstetico(btn_Pozo_Frio);
         aplicarEstiloEstetico(btn_Salto_Tigre);
         aplicarEstiloEstetico(btn_Cascada_Salado);
+        aplicarEstiloEstetico(btn_Volver);
     }
     public JButton getBtn_Pozo_Frio() {
             return btn_Pozo_Frio;
@@ -110,6 +109,7 @@ public class Vista_Municipio_Puerto_Rico extends javax.swing.JFrame {
         btn_Cascada_Salado = new javax.swing.JButton();
         btn_Salto_Tigre = new javax.swing.JButton();
         btn_Pozo_Frio = new javax.swing.JButton();
+        btn_Volver = new javax.swing.JButton();
         lbl_foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -118,7 +118,7 @@ public class Vista_Municipio_Puerto_Rico extends javax.swing.JFrame {
 
         btn_Cascada_Salado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
         btn_Cascada_Salado.setText("Cascada El Salado ");
-        getContentPane().add(btn_Cascada_Salado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 50, 200, 40));
+        getContentPane().add(btn_Cascada_Salado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 60, 200, 40));
 
         btn_Salto_Tigre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/punto interes.png"))); // NOI18N
         btn_Salto_Tigre.setText("Salto Del Tigre");
@@ -133,6 +133,14 @@ public class Vista_Municipio_Puerto_Rico extends javax.swing.JFrame {
         });
         getContentPane().add(btn_Pozo_Frio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 200, 50));
 
+        btn_Volver.setText("Volver");
+        btn_Volver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_VolverMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btn_Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 40));
+
         lbl_foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/doncello.png"))); // NOI18N
         lbl_foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(lbl_foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 720));
@@ -143,6 +151,10 @@ public class Vista_Municipio_Puerto_Rico extends javax.swing.JFrame {
     private void btn_Pozo_FrioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Pozo_FrioMouseClicked
 
     }//GEN-LAST:event_btn_Pozo_FrioMouseClicked
+
+    private void btn_VolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_VolverMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_btn_VolverMouseClicked
 
     /**
      * @param args the command line arguments
@@ -174,17 +186,16 @@ public class Vista_Municipio_Puerto_Rico extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Vista_Municipio_Puerto_Rico vista = new Vista_Municipio_Puerto_Rico();
-                Controlador_Puerto_Rico controlador = new Controlador_Puerto_Rico(vista);
-                vista.setVisible(true);
+                new Vista_Municipio_Puerto_Rico().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Cascada_Salado;
+    public javax.swing.JButton btn_Cascada_Salado;
     public javax.swing.JButton btn_Pozo_Frio;
-    private javax.swing.JButton btn_Salto_Tigre;
+    public javax.swing.JButton btn_Salto_Tigre;
+    public javax.swing.JButton btn_Volver;
     private javax.swing.JLabel lbl_foto;
     // End of variables declaration//GEN-END:variables
 }

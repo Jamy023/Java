@@ -46,7 +46,7 @@ public class VentanaTuristica extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new VentanaTuristica("C:\\Users\\userx\\Documents\\Java ADSO\\SitiosTuristicos\\src\\imagenes\\sena360.JPEG").setVisible(true);
+            new VentanaTuristica("D:\\OneDrive\\Documentos\\GitHub\\java\\SitiosTuristicos\\src\\img\\360_4.jpg").setVisible(true);
         });
     }
 }

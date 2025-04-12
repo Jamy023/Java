@@ -112,7 +112,7 @@ public class modelo_sitios_turisticos {
             return "No se encontró información para el sitio: " + nombreSitio;
         }
 
-        return descripcion + "\nPrecio: $" + precio + "\nCalificación promedio: " + String.format("%.1f", promedioEstrellas) + " estrellas";
+        return descripcion + "\nPrecio De Entrada: $" + precio + "\nCalificación Promedio: " + String.format("%.1f", promedioEstrellas) + " estrellas";
     }
     
     public Map<Integer, String> obtenerServiciosPorSitio(String nombreSitio) {
