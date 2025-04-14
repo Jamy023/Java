@@ -74,7 +74,7 @@ public class restaurante extends javax.swing.JFrame {
                 btn_cerrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 110, 40));
+        getContentPane().add(btn_cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 110, 40));
 
         img.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 770));

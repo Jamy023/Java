@@ -35,7 +35,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         FondoDesenfoque.setVisible(false);
         jbt_admin.setContentAreaFilled(false); 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        fondo(jlb_fondo, "src\\img\\foto menu.png");
+        fondo(jlb_fondo, "src\\img\\f1.png");
         
         new Menu_Principal_C(this);
         
@@ -46,7 +46,7 @@ public class Menu_Principal extends javax.swing.JFrame {
     }
     
     public void fondo(JLabel label, String ruta) {
-        ImageIcon icon = new ImageIcon("src\\img\\foto menu.png");
+        ImageIcon icon = new ImageIcon("src\\img\\f1.png");
         Image img = icon.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
         label.setIcon(new ImageIcon(img));
 
