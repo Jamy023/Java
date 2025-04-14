@@ -50,7 +50,7 @@ public class controlador_sitios_turisticos implements ActionListener{
         vista.setTitle("Sitios turisticos");
         vista.setLocationRelativeTo(null);
         
-        vista.lblNombre_sitio.setText(sitio_turistico);
+        vista.lblNombre.setText(sitio_turistico);
         
         
         List<String> grupoSitioInteres = imagenes.get(3);

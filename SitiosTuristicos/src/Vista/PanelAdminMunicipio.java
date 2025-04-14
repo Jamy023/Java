@@ -79,9 +79,12 @@ public class PanelAdminMunicipio extends JFrame {
         
         initComponents();
         cargarDatos();
+        
     }
     
     private void initComponents() {
+        
+        
         cargarDatos();
         setUndecorated(true);
         // Panel superior con título
@@ -92,6 +95,7 @@ public class PanelAdminMunicipio extends JFrame {
         JLabel titleLabel = new JLabel("SITIOS TURÍSTICOS DE " + nombreMunicipio.toUpperCase());
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
         titleLabel.setForeground(COLOR_TEXT_LIGHT);
+        
         
         JButton closeButton = new JButton("✖");
         closeButton.setFont(new Font("Segoe UI", Font.BOLD, 16));
@@ -438,7 +442,7 @@ public boolean stopCellEditing() {
         int sitioId = (int) table.getValueAt(row, 0); // Asumiendo que el ID está en la columna 0
         
         // Abrir la ventana de ediciónsitioId
-        EditarSitioView editarView = newEditarSitioView(controlador, sitioId , PanelAdminMunicipio.this);
+        EditarSitioView editarView = new EditarSitioView(controlador, sitioId , PanelAdminMunicipio.this);
                                                                                                                   
         editarView.setVisible(true);
     } else if ("Eliminar".equals(label)) {

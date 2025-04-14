@@ -24,6 +24,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -44,6 +45,7 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
     
     public vista_sitios_turisticos(String sitio_turistico) {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         
 
         controlador = new controlador_sitios_turisticos(this, modelo, sitio_turistico);
@@ -54,23 +56,24 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         aplicarEstiloEstetico(btn_calificar);
         aplicarEstiloEstetico2(Servicios);
         
-        aplicarEstiloTituloTurismo(lblNombre_sitio);
+        aplicarEstiloEstetico3(lblNombre);
         Subtitulo(lbl_descripcion);
         Subtitulo(lbl_descripcion1);
         Subtitulo(lbl_descripcion4);
         Subtitulo(lbl_servicios);
         
         personalizarEstrellas();
+        fondo(foto, "src\\img\\FONDO33.png");
         
         
         
     }
-    
+
+
     public void fondo(JLabel label, String ruta) {
-        ImageIcon icon = new ImageIcon("src\\img\\foto fodo2.png");
+        ImageIcon icon = new ImageIcon("src\\img\\FONDO33.png");
         Image img = icon.getImage().getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
         label.setIcon(new ImageIcon(img));
-
     }
         public static void aplicarEstiloEstetico2(JPanel panel) {
         panel.setBackground(new Color(230, 255, 230)); // Verde muy claro estilo SENA
@@ -108,7 +111,52 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
             }
         });
     }
+        
+        
+    public static void aplicarEstiloEstetico3(JLabel label) {
+    label.setFont(new Font("Segoe UI", Font.BOLD, 16));
+    label.setForeground(new Color(33, 37, 41)); // Gris oscuro sobrio
+    label.setOpaque(true);
+    label.setBackground(new Color(144, 238, 144)); // Verde suave estilo SENA
+    label.setHorizontalAlignment(SwingConstants.CENTER);
+    label.setVerticalAlignment(SwingConstants.CENTER);
+    label.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+    label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
+    // Efecto hover con MouseListener
+    label.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            label.setBackground(new Color(124, 218, 124)); // Verde más intenso
+            label.repaint();
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            label.setBackground(new Color(144, 238, 144));
+            label.repaint();
+        }
+    });
+
+    // 🎨 Estilo gráfico personalizado con bordes redondeados
+    label.setUI(new javax.swing.plaf.basic.BasicLabelUI() {
+        @Override
+        public void paint(Graphics g, JComponent c) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            int w = c.getWidth();
+            int h = c.getHeight();
+
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(label.getBackground());
+            g2.fillRoundRect(0, 0, w, h, 30, 30); // Bordes redondeados
+
+            g2.dispose();
+            super.paint(g, c); // Dibuja el texto y demás
+        }
+        });
+    }
+    
+        
     private void personalizarEstrellas() {
         // Configurar colores principales
         getContentPane().setBackground(new Color(245, 245, 245));
@@ -135,64 +183,7 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         ));
     }
     
-    public static void aplicarEstiloTituloTurismo(JLabel titulo) {
-        titulo.setFont(new Font("Segoe UI", Font.BOLD, 36));
-        titulo.setForeground(new Color(33, 67, 121)); // Azul inspirado en el mar
-        titulo.setHorizontalAlignment(JLabel.CENTER);
-        titulo.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
-        titulo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-        // Efecto de relieve y sombra
-        titulo.setUI(new javax.swing.plaf.basic.BasicLabelUI() {
-            
-            @Override
-            public void paint(Graphics g, JComponent c) {
-            Graphics2D g2 = (Graphics2D) g.create();
-            
-            // Configuración de calidad
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
-
-            // Fondo degradado oceánico
-            GradientPaint gradient = new GradientPaint(
-                0, 0, new Color(173, 216, 230), // Azul claro
-                c.getWidth(), 0, new Color(240, 248, 255) // Azul blanquecino
-            );
-            g2.setPaint(gradient);
-            g2.fillRoundRect(0, 0, c.getWidth(), c.getHeight(), 25, 25);
-
-            // Sombra del texto
-            g2.setColor(new Color(0, 0, 0, 50));
-            g2.setFont(c.getFont());
-            FontMetrics fm = g2.getFontMetrics();
-            String text = ((JLabel)c).getText();
-            int x = (c.getWidth() - fm.stringWidth(text)) / 2;
-            int y = ((c.getHeight() - fm.getHeight()) / 2) + fm.getAscent() + 2;
-            g2.drawString(text, x, y);
-
-            // Texto principal
-            g2.setColor(c.getForeground());
-            g2.drawString(text, x, y - 2);
-
-            g2.dispose();
-        }
-    });
-
-    // Efecto hover turístico
-    titulo.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            titulo.setForeground(new Color(0, 102, 153)); // Azul más intenso
-            titulo.setBorder(BorderFactory.createMatteBorder(0, 0, 3, 0, new Color(255, 165, 0))); // Subrayado naranja
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-                titulo.setForeground(new Color(33, 67, 121));
-                titulo.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30));
-            }
-        });
-    }
+    
     public static void Subtitulo(JLabel subtitulo) {
     subtitulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
     subtitulo.setForeground(new Color(0, 102, 51)); // Verde bosque
@@ -270,7 +261,6 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btn_volver = new javax.swing.JButton();
         lbl_descripcion1 = new javax.swing.JLabel();
-        lblNombre_sitio = new javax.swing.JLabel();
         estrella1 = new javax.swing.JLabel();
         btn_vista360 = new javax.swing.JButton();
         lbl_descripcion4 = new javax.swing.JLabel();
@@ -283,18 +273,19 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         lblCalificacion = new javax.swing.JLabel();
         estrella5 = new javax.swing.JLabel();
         lblDescripcion = new javax.swing.JLabel();
-        lblNombre_sitio1 = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
         img = new javax.swing.JLabel();
         Servicios = new javax.swing.JPanel();
         lblPrecio = new javax.swing.JLabel();
+        foto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 51, 51));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(1920, 1080));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(java.awt.Color.lightGray);
+        jPanel1.setPreferredSize(new java.awt.Dimension(1920, 1080));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_volver.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
@@ -310,13 +301,7 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         lbl_descripcion1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         lbl_descripcion1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_descripcion1.setText("DESCRIPCION DEL LUGAR");
-        jPanel1.add(lbl_descripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, 530, -1));
-
-        lblNombre_sitio.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 36)); // NOI18N
-        lblNombre_sitio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNombre_sitio.setText("jLabel1");
-        lblNombre_sitio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(lblNombre_sitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 590, 50));
+        jPanel1.add(lbl_descripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 530, -1));
 
         estrella1.setBackground(new java.awt.Color(255, 51, 51));
         estrella1.setText("jLabel2");
@@ -332,7 +317,7 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
                 estrella1MouseExited(evt);
             }
         });
-        jPanel1.add(estrella1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 880, 50, 50));
+        jPanel1.add(estrella1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1610, 920, 50, 50));
 
         btn_vista360.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_vista360.setText("vista 360°");
@@ -341,12 +326,12 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
         lbl_descripcion4.setFont(new java.awt.Font("Segoe Script", 2, 14)); // NOI18N
         lbl_descripcion4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_descripcion4.setText("PRECIO DE LA ENTRADA");
-        jPanel1.add(lbl_descripcion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 560, 330, 50));
+        jPanel1.add(lbl_descripcion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 20, 330, 50));
 
         lbl_servicios.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         lbl_servicios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_servicios.setText("Servicios disponibles");
-        jPanel1.add(lbl_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 550, 390, -1));
+        jPanel1.add(lbl_servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 250, 390, -1));
 
         estrella3.setBackground(java.awt.Color.gray);
         estrella3.setText("jLabel2");
@@ -362,11 +347,11 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
                 estrella3MouseExited(evt);
             }
         });
-        jPanel1.add(estrella3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 880, 50, 50));
+        jPanel1.add(estrella3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1730, 920, 50, 50));
 
         btn_calificar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btn_calificar.setText("Calificar");
-        jPanel1.add(btn_calificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 940, -1, -1));
+        jPanel1.add(btn_calificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1700, 980, -1, -1));
 
         estrella2.setBackground(java.awt.Color.gray);
         estrella2.setText("jLabel2");
@@ -382,7 +367,7 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
                 estrella2MouseExited(evt);
             }
         });
-        jPanel1.add(estrella2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 880, 50, 50));
+        jPanel1.add(estrella2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1670, 920, 50, 50));
 
         estrella4.setBackground(java.awt.Color.gray);
         estrella4.setText("jLabel2");
@@ -398,18 +383,19 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
                 estrella4MouseExited(evt);
             }
         });
-        jPanel1.add(estrella4, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 880, 50, 50));
+        jPanel1.add(estrella4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1790, 920, 50, 50));
 
         lbl_descripcion.setFont(new java.awt.Font("Segoe Script", 2, 14)); // NOI18N
         lbl_descripcion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_descripcion.setText("PROMEDIO DE  ESTRELLAS ");
-        jPanel1.add(lbl_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 560, 400, 50));
+        jPanel1.add(lbl_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 400, 50));
 
         lblCalificacion.setBackground(new java.awt.Color(255, 255, 255));
         lblCalificacion.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblCalificacion.setForeground(new java.awt.Color(255, 255, 255));
         lblCalificacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCalificacion.setText("jLabel1");
-        jPanel1.add(lblCalificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 610, 190, 60));
+        jPanel1.add(lblCalificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 590, 190, 60));
 
         estrella5.setBackground(java.awt.Color.gray);
         estrella5.setText("jLabel2");
@@ -425,23 +411,24 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
                 estrella5MouseExited(evt);
             }
         });
-        jPanel1.add(estrella5, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 880, 50, 50));
+        jPanel1.add(estrella5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1850, 920, 50, 50));
 
         lblDescripcion.setBackground(new java.awt.Color(255, 255, 255));
         lblDescripcion.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        lblDescripcion.setForeground(new java.awt.Color(255, 255, 255));
         lblDescripcion.setText("jLabel1");
         lblDescripcion.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel1.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, 480, 360));
+        jPanel1.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 480, 360));
 
-        lblNombre_sitio1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 36)); // NOI18N
-        lblNombre_sitio1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNombre_sitio1.setText("jLabel1");
-        lblNombre_sitio1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(lblNombre_sitio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 590, 50));
+        lblNombre.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 36)); // NOI18N
+        lblNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNombre.setText("jLabel1");
+        lblNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 590, 50));
 
         img.setText("jLabel1");
         img.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1920, 540));
+        jPanel1.add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 840, 550));
 
         Servicios.setBackground(java.awt.Color.lightGray);
 
@@ -456,15 +443,17 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
             .addGap(0, 120, Short.MAX_VALUE)
         );
 
-        jPanel1.add(Servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 610, 360, 120));
+        jPanel1.add(Servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1510, 310, 360, 120));
 
         lblPrecio.setBackground(new java.awt.Color(255, 255, 255));
         lblPrecio.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblPrecio.setForeground(new java.awt.Color(255, 255, 255));
         lblPrecio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrecio.setText("jLabel1");
-        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 610, 190, 60));
+        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 70, 190, 60));
+        jPanel1.add(foto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1920, 1080));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -690,12 +679,12 @@ public class vista_sitios_turisticos extends javax.swing.JFrame {
     public javax.swing.JLabel estrella3;
     public javax.swing.JLabel estrella4;
     public javax.swing.JLabel estrella5;
+    public javax.swing.JLabel foto;
     public javax.swing.JLabel img;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JLabel lblCalificacion;
     public javax.swing.JLabel lblDescripcion;
-    public javax.swing.JLabel lblNombre_sitio;
-    public javax.swing.JLabel lblNombre_sitio1;
+    public javax.swing.JLabel lblNombre;
     public javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lbl_descripcion;
     private javax.swing.JLabel lbl_descripcion1;

@@ -70,7 +70,7 @@ public class UsuarioControlador implements ActionListener {
         
         
         
-        vista.dispose();
+        //vista.dispose();
     } else {
         JOptionPane.showMessageDialog(vista, "Correo o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
     }

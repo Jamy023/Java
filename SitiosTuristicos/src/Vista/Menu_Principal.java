@@ -32,6 +32,7 @@ public class Menu_Principal extends javax.swing.JFrame {
     
     public Menu_Principal() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         FondoDesenfoque.setVisible(false);
         jbt_admin.setContentAreaFilled(false); 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);

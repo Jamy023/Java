@@ -17,6 +17,7 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import Vista.vista_sitios_turisticos;
+import java.io.File;
 import java.net.URL;
 
 public class modelo_sitios_turisticos {
@@ -425,5 +426,80 @@ public class modelo_sitios_turisticos {
 
         return rutaImagen;
     }
+    public boolean quitarImagenPorNombreSitio(String nombreArchivo) {
+    boolean resultado = false;
+    Connection conexion = null;
+    PreparedStatement ps = null;
+    
+    try {
+        conexion = obtenerConexion();
+        // Cambiamos "ruta" por "imagen" para que coincida con el nombre de la columna
+        String sql = "DELETE FROM imagenes WHERE imagen = ? OR imagen LIKE ?";
+        ps = conexion.prepareStatement(sql);
+        ps.setString(1, nombreArchivo);
+        ps.setString(2, "%" + nombreArchivo); // Para manejar casos donde la imagen incluye una ruta
+        
+        int filasAfectadas = ps.executeUpdate();
+        if (filasAfectadas > 0) {
+            resultado = true;
+            System.out.println("Imagen eliminada correctamente: " + nombreArchivo);
+        } else {
+            System.out.println("No se encontró la imagen para eliminar: " + nombreArchivo);
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al eliminar imagen: " + e.getMessage());
+        e.printStackTrace();
+    } finally {
+        try {
+            if (ps != null) ps.close();
+            if (conexion != null) conexion.close();
+        } catch (SQLException e) {
+            System.out.println("Error al cerrar conexiones: " + e.getMessage());
+        }
+    }
+    
+    return resultado;
+}
+    public boolean agregarImagenPorNombreSitio(String nombreSitio, String rutaImagen, int tipoImagen) {
+    Connection conexion = null;
+    PreparedStatement pstmt = null;
+    boolean resultado = false;
 
+    try {
+        // Obtener el ID del sitio basado en el nombre
+        String obtenerIdSitio = "SELECT id FROM sitios_interes WHERE nombre_sitio = ?";
+        conexion = Conexion.obtenerConexion();
+        try (PreparedStatement ps = conexion.prepareStatement(obtenerIdSitio)) {
+            ps.setString(1, nombreSitio);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int idSitio = rs.getInt("id");
+
+                    // Insertar la imagen
+                    String consulta = "INSERT INTO imagenes (id_sitio_fk, imagen, id_tipo_servicio_fk, nombre_imagen ) VALUES (?, ?, ?, ?)";
+                    pstmt = conexion.prepareStatement(consulta);
+                    pstmt.setInt(1, idSitio);
+                    pstmt.setString(2, rutaImagen);
+                    pstmt.setInt(3, tipoImagen);
+                    pstmt.setString(4, new File(rutaImagen).getName()); // Extraer el nombre del archivo
+
+                    int filasAfectadas = pstmt.executeUpdate();
+                    resultado = (filasAfectadas > 0);
+                }
+            }
+        }
+    } catch (SQLException e) {
+        System.err.println("Error al agregar imagen: " + e.getMessage());
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pstmt != null) pstmt.close();
+            if (conexion != null) conexion.close();
+        } catch (SQLException e) {
+            System.err.println("Error al cerrar la conexión: " + e.getMessage());
+        }
+    }
+
+    return resultado;
+}
 }
